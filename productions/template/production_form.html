@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Créer une nouvelle production</title>
+</head>
+<body>
+    <h1>Créer une nouvelle production</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}  <!-- Affiche le formulaire sous forme de paragraphes -->
+        <button type="submit">Créer</button>
+    </form>
+</body>
+</html>
