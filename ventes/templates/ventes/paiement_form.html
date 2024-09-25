@@ -1,0 +1,8 @@
+<!-- paiement_form.html -->
+<h2>Paiement pour la vente de {{ vente.production }}</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Effectuer le paiement</button>
+</form>
+<a href="{% url 'vente-list' %}">Retour à la liste des ventes</a>
