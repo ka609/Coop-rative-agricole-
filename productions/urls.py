@@ -1,7 +1,7 @@
 from django.urls import path
-from .views import ProductionListView, ProductionCreateView
+from . import views
 
 urlpatterns = [
-    path('', ProductionListView.as_view(), name='production-list'),
-    path('ajouter/', ProductionCreateView.as_view(), name='production-create'),  # Nouvelle route pour créer une production
+    path('productions/', views.liste_productions, name='liste_productions'),
+    path('productions/<int:id>/', views.detail_production, name='detail_production'),
 ]

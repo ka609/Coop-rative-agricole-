@@ -2,24 +2,42 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bd2bf241-c1f0-4f59-b067-7e3010c38741" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/Coo_backend.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Coo_backend/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Coo_backend/asgi.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Coo_backend/settings.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Coo_backend/urls.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Coo_backend/wsgi.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/formations/urls.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/manage.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/membres/urls.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/productions/template/production_form.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/productions/urls.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ventes/urls.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/formations/admin.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/formations/apps.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/formations/migrations/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/formations/models.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/formations/tests.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/formations/views.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/membres/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/membres/admin.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/membres/apps.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/membres/migrations/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/membres/models.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/membres/tests.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/membres/views.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/productions/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/productions/admin.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/productions/apps.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/productions/migrations/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/productions/models.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/productions/tests.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/productions/views.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ventes/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ventes/admin.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ventes/apps.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ventes/migrations/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ventes/models.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ventes/tests.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ventes/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Coo_backend/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/Coo_backend/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/formations/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/formations/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/membres/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/membres/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/productions/template/production_form.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/productions/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/productions/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ventes/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/formations/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ventes/templates/ventes/paiement_form.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ventes/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/ventes/urls.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,14 +48,26 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Python Unit Test" />
-        <option value="Python Script" />
         <option value="HTML File" />
+        <option value="Python Script" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "ka609"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/ka609/Coop-rative-agricole-.git",
+    "accountId": "539b2ac4-fcf6-4de5-9350-6288363d8a0a"
+  }
+}]]></component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 6
 }</component>
@@ -49,17 +79,17 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
-    &quot;RunOnceActivity.OpenDjangoStructureViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Kassongo Moussa/PycharmProjects/Coo_backend/formation&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "DefaultHtmlFileTemplate": "HTML File",
+    "RunOnceActivity.OpenDjangoStructureViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "C:/Users/Kassongo Moussa/PycharmProjects/Coo_backend/formation",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Kassongo Moussa\PycharmProjects\Coo_backend\formation" />
@@ -84,6 +114,7 @@
       <workItem from="1727139358436" duration="4538000" />
       <workItem from="1727162886303" duration="23974000" />
       <workItem from="1727210738162" duration="1080000" />
+      <workItem from="1727641846854" duration="8731000" />
     </task>
     <servers />
   </component>

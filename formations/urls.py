@@ -2,7 +2,8 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('', views.FormationListView.as_view(), name='formation-list'),
-    path('create/', views.FormationCreateView.as_view(), name='formation-create'),
-    path('<int:pk>/', views.FormationDetailView.as_view(), name='formation-detail'),
+    path('formations/', views.liste_formations, name='liste_formations'),
+    path('formations/<int:id>/', views.detail_formation, name='detail_formation'),
+    path('formateurs/', views.liste_formateurs, name='liste_formateurs'),
+    path('categories/', views.liste_categories, name='liste_categories'),
 ]
