@@ -1,25 +1,27 @@
 from django.db import models
-from membres.models import Membre
-
-class Formateur(models.Model):
-    nom = models.CharField(max_length=100)
-    prenom = models.CharField(max_length=100)
-    email = models.EmailField(unique=True)
-
-class Categorie(models.Model):
-    nom = models.CharField(max_length=100)
 
 class Formation(models.Model):
+    TYPE_CHOICES = [
+        ('QIZ', 'Quiz'),
+        ('TUTORIAL', 'Tutoriel'),
+        ('DOCUMENT', 'Document'),
+        ('VIDEO', 'Vidéo'),
+    ]
+
     titre = models.CharField(max_length=200)
     description = models.TextField()
-    date_debut = models.DateField()
-    date_fin = models.DateField()
-    formateur = models.ForeignKey(Formateur, on_delete=models.CASCADE)
-    categorie = models.ForeignKey(Categorie, on_delete=models.CASCADE)
-    membres_participants = models.ManyToManyField(Membre)
+    type_formation = models.CharField(max_length=10, choices=TYPE_CHOICES)
+    fichier = models.FileField(upload_to='formations/', null=True, blank=True)  # Pour les documents et vidéos
+    lien_video = models.URLField(null=True, blank=True)  # Pour les tutoriels vidéo
+    date_publication = models.DateTimeField(auto_now_add=True)
 
-class Progression(models.Model):
-    membre = models.ForeignKey(Membre, on_delete=models.CASCADE)
-    formation = models.ForeignKey(Formation, on_delete=models.CASCADE)
-    progression = models.DecimalField(max_digits=5, decimal_places=2, default=0.00)
+    # Pour les QCM (QIZ)
+    question = models.TextField(null=True, blank=True)  # Question du QIZ
+    option_1 = models.CharField(max_length=200, null=True, blank=True)
+    option_2 = models.CharField(max_length=200, null=True, blank=True)
+    option_3 = models.CharField(max_length=200, null=True, blank=True)
+    option_4 = models.CharField(max_length=200, null=True, blank=True)
+    bonne_reponse = models.CharField(max_length=200, null=True, blank=True)  # Réponse correcte pour le QIZ
 
+    def __str__(self):
+        return self.titre

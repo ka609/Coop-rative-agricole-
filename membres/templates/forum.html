@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% block content %}
+<h2>Forum</h2>
+
+<a href="{% url 'membres:create_thread' %}" class="btn btn-success mb-3">Nouveau sujet</a>
+
+{% for thread in threads %}
+    <div class="mb-4">
+        <h4><a href="{% url 'membres:thread_detail' thread.id %}">{{ thread.title }}</a></h4>
+        <p>{{ thread.content|truncatewords:20 }}</p>
+        <small>Posté par {{ thread.author }} le {{ thread.created_at }}</small>
+
+        <!-- Boutons Modifier et Supprimer -->
+        {% if request.user == thread.author %}
+            <div class="mt-2">
+                <a href="{% url 'membres:modifier_thread' thread.id %}" class="btn btn-warning btn-sm">Modifier</a>
+                <a href="{% url 'membres:supprimer_thread' thread.id %}" class="btn btn-danger btn-sm"
+                   onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce thread ?');">Supprimer</a>
+            </div>
+        {% endif %}
+    </div>
+    <hr>
+{% endfor %}
+{% endblock %}

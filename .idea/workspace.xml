@@ -1,43 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="bd2bf241-c1f0-4f59-b067-7e3010c38741" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/formations/admin.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/formations/apps.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/formations/migrations/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/formations/models.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/formations/tests.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/formations/views.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/membres/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/membres/admin.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/membres/apps.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/membres/migrations/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/membres/models.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/membres/tests.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/membres/views.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/productions/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/productions/admin.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/productions/apps.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/productions/migrations/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/productions/models.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/productions/tests.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/productions/views.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ventes/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ventes/admin.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ventes/apps.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ventes/migrations/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ventes/models.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ventes/tests.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ventes/views.py" afterDir="false" />
+    <list default="true" id="bd2bf241-c1f0-4f59-b067-7e3010c38741" name="Changes" comment="modifié">
+      <change afterPath="$PROJECT_DIR$/membres/forms.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/membres/templates/Profil.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/membres/templates/create_thread.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/membres/templates/forum.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/membres/templates/login.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/membres/templates/password_reset.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/membres/templates/password_reset_complete.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/membres/templates/password_reset_confirm.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/membres/templates/password_reset_done.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/membres/templates/register.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/membres/templates/thread_detail.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/productions/templates/catalogue_produits.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/Dashboard.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ventes/templates/detail_commande.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ventes/templates/detail_panier.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ventes/templates/liste_transactions.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Coo_backend/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/Coo_backend/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Coo_backend/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/Coo_backend/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Coo_backend/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Coo_backend/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/formations/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/formations/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/formations/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/formations/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/formations/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/formations/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/formations/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/formations/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/membres/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/membres/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/membres/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/membres/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/membres/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/membres/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/productions/template/production_form.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/membres/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/membres/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/productions/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/productions/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ventes/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/formations/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ventes/templates/ventes/paiement_form.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/productions/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/productions/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/home.html" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/ventes/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/ventes/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ventes/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/ventes/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,26 +48,26 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Python Unit Test" />
-        <option value="HTML File" />
         <option value="Python Script" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "ka609"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;ka609&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/ka609/Coop-rative-agricole-.git",
-    "accountId": "539b2ac4-fcf6-4de5-9350-6288363d8a0a"
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/ka609/Coop-rative-agricole-.git&quot;,
+    &quot;accountId&quot;: &quot;539b2ac4-fcf6-4de5-9350-6288363d8a0a&quot;
   }
-}]]></component>
+}</component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 6
 }</component>
@@ -79,19 +79,26 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "DefaultHtmlFileTemplate": "HTML File",
-    "RunOnceActivity.OpenDjangoStructureViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
-    "last_opened_file_path": "C:/Users/Kassongo Moussa/PycharmProjects/Coo_backend/formation",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;RunOnceActivity.OpenDjangoStructureViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Kassongo Moussa/PycharmProjects/Coop-rative-agricole-/membres/templates&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Kassongo Moussa\PycharmProjects\Coop-rative-agricole-\membres\templates" />
+      <recent name="C:\Users\Kassongo Moussa\PycharmProjects\Coop-rative-agricole-\formations\templates" />
+      <recent name="C:\Users\Kassongo Moussa\PycharmProjects\Coop-rative-agricole-\formations\templates\formations" />
       <recent name="C:\Users\Kassongo Moussa\PycharmProjects\Coo_backend\formation" />
     </key>
   </component>
@@ -114,8 +121,25 @@
       <workItem from="1727139358436" duration="4538000" />
       <workItem from="1727162886303" duration="23974000" />
       <workItem from="1727210738162" duration="1080000" />
-      <workItem from="1727641846854" duration="8731000" />
+      <workItem from="1727641846854" duration="9330000" />
+      <workItem from="1727706055391" duration="19027000" />
+      <workItem from="1727765680342" duration="9920000" />
+      <workItem from="1727812266920" duration="3895000" />
+      <workItem from="1727852017635" duration="33985000" />
+      <workItem from="1727939014177" duration="52843000" />
+      <workItem from="1728072953547" duration="13641000" />
+      <workItem from="1728111660609" duration="37323000" />
+      <workItem from="1728206296402" duration="13611000" />
     </task>
+    <task id="LOCAL-00001" summary="modifié">
+      <option name="closed" value="true" />
+      <created>1727652390636</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1727652390644</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -123,10 +147,26 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="main" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="modifié" />
+    <option name="LAST_COMMIT_MESSAGE" value="modifié" />
   </component>
 </project>

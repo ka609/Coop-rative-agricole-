@@ -1,0 +1,34 @@
+<!-- templates/catalogue_produits.html -->
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catalogue des produits</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1 class="my-4">Catalogue des produits agricoles</h1>
+
+        <div class="row">
+            {% for produit in produits %}
+                <div class="col-md-4">
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ produit.nom }}</h5>
+                            <p class="card-text">{{ produit.description }}</p>
+                            <p class="card-text">{{ produit.prix_unitaire }} €</p>
+                            <form method="POST" action="{% url 'ajouter_panier' produit.id %}">
+                                {% csrf_token %}
+                                <input type="number" name="quantite" value="1" min="1" class="form-control mb-2">
+                                <button type="submit" class="btn btn-success">Ajouter au panier</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>

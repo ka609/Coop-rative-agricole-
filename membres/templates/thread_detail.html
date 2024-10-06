@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% block content %}
+<h2>{{ thread.title }}</h2>
+<p>{{ thread.content }}</p>
+<p><small>Posté par {{ thread.author }} le {{ thread.created_at }}</small></p>
+
+<hr>
+
+<h4>Réponses</h4>
+{% for reply in replies %}
+    <div class="mb-3">
+        <strong>{{ reply.author }}</strong>
+        <p>{{ reply.content }}</p>
+        <small>Posté le {{ reply.created_at }}</small>
+        <hr>
+    </div>
+{% empty %}
+    <p>Aucune réponse pour le moment. Soyez le premier à répondre !</p>
+{% endfor %}
+
+<h4>Ajouter une réponse</h4>
+<form method="post">
+    {% csrf_token %}
+    {{ reply_form.as_p }}
+    <button type="submit" class="btn btn-primary">Répondre</button>
+</form>
+{% endblock %}
