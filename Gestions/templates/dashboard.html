@@ -1,0 +1,60 @@
+
+
+{%load static%}
+{% extends 'base.html' %}
+
+{% block title %}Dashboard{% endblock %}
+
+{%load static%}
+{% block content %}
+<div class="container py-5">
+    <h1 class="text-center mb-4">Tableau de bord</h1>
+
+    <!-- Statistiques principales -->
+    <li class="nav-item"><a href="{% url 'Gestions:membre_list' %}" class="nav-link text-white">Membres</a></li>
+    <li class="nav-item"><a href="{% url 'Gestions:produit_list' %}" class="nav-link text-white">Produits</a></li>
+    <li class="nav-item"><a href="{% url 'Gestions:formation_list' %}" class="nav-link text-white">Formations</a></li><li class="nav-item"><a href="{% url 'Gestions:dashboard' %}" class="nav-link text-white">Tableau de bord</a></li>
+    <li class="nav-item"><a href="{% url 'accounts:logout' %}" class="nav-link text-white">Déconnexion</a></li>
+    <div class="row text-center mb-4">
+        <div class="col-md-4">
+            <div class="card bg-primary text-white">
+                <div class="card-body">
+                    <i class="fas fa-users fa-3x mb-2"></i>
+                    <h5 class="card-title">Total Membres</h5>
+                    <p class="card-text">{{ stats.total_members }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card bg-success text-white">
+                <div class="card-body">
+                    <i class="fas fa-tractor fa-3x mb-2"></i>
+                    <h5 class="card-title">Total Productions</h5>
+                    <p class="card-text">{{ stats.total_productions }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card bg-warning text-white">
+                <div class="card-body">
+                    <i class="fas fa-shopping-cart fa-3x mb-2"></i>
+                    <h5 class="card-title">Total Commandes</h5>
+                    <p class="card-text">{{ stats.total_orders }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Activités récentes -->
+    <h3 class="mb-3">Activités Récentes</h3>
+    <ul class="list-group">
+        {% for activity in recent_activities %}
+        <li class="list-group-item">
+            <h5>{{ activity.title }}</h5>
+            <p class="mb-1">{{ activity.description }}</p>
+            <small class="text-muted">Le {{ activity.date }}</small>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

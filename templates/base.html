@@ -1,0 +1,72 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %} Coopérative Agricole {% endblock %}</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <!-- En-tête -->
+    <header class="bg-dark text-white py-3">
+        <div class="container">
+            <div class="d-flex justify-content-between">
+                <h1><a href="{% url 'index' %}" class="text-white">Coopérative Agricole</a></h1>
+                <nav>
+                    <ul class="nav">
+                        <li class="nav-item"><a href="{% url 'index' %}" class="nav-link text-white">Accueil</a></li>
+                        {% if user.is_authenticated %}
+                            <li class="nav-item"><a href="{% url 'Gestions:forum' %}"class="nav-link text-white">Forum</a></li>
+                            <li class="nav-item"><a href="{% url 'Gestions:dashboard' %}" class="nav-link text-white">Tableau de bord</a></li>
+                             <li class="nav-item"><a href="{% url 'accounts:logout' %}" class="nav-link text-white">Déconnexion</a></li>
+                        {% else %}
+                             <li class="nav-item"><a href="{% url 'accounts:register' %}"class="nav-link text-white">Créez un compte</a></li>
+                            <li class="nav-item"><a href="{% url 'accounts:login' %}" class="nav-link text-white">Connexion</a></li>
+                        {% endif %}
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Corps de la page -->
+    <main class="container py-5">
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <!-- Pied de page -->
+    <footer class="bg-secondary text-white py-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5>À propos</h5>
+                    <p>La Coopérative Agricole aide les agriculteurs à vendre leurs produits et à se former.</p>
+                </div>
+                <div class="col-md-3">
+                    <h5>Liens rapides</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="{% url 'Gestions:contact' %}" class="text-white">Contact</a></li>
+                        <li><a href="{% url 'Gestions:faq' %}" class="text-white">FAQ</a></li>
+                        <li><a href="{% url 'Gestions:support' %}" class="text-white">Support</a></li>
+                        <li><a href="{% url 'Gestions:legal' %}" class="text-white">Mentions légales</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h5>Suivez-nous</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-white"><i class="fab fa-facebook"></i> Facebook</a></li>
+                        <li><a href="#" class="text-white"><i class="fab fa-twitter"></i> Twitter</a></li>
+                        <li><a href="#" class="text-white"><i class="fab fa-instagram"></i> Instagram</a></li>
+                    </ul>
+                </div>
+            </div>
+            <p class="text-center mt-4">© 2024 Coopérative Agricole</p>
+        </div>
+    </footer>
+</body>
+</html>

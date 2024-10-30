@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}Liste des Produits{% endblock %}
+
+{%load static%}
+{% block content %}
+<div class="container">
+    <h2 class="mb-4">Liste des Produits</h2>
+    <div class="mb-3">
+        <a href="{% url 'Gestions:produit_create' %}" class="btn btn-primary">Ajouter un Produit</a>
+    </div>
+    <div class="row">
+        {% for produit in object_list %}
+        <div class="col-md-4 mb-3">
+            <div class="card">
+                <img src="{{ produit.image.url }}" class="card-img-top" alt="{{ produit.nom }}">
+                <div class="card-body">
+                    <h5 class="card-title">{{ produit.nom }}</h5>
+                    <p class="card-text">Prix: {{ produit.prix }} FCFA</p>
+                    <p class="card-text">Description: {{ produit.description }}</p>
+                    <p class="card-text">Date de Publication: {{ produit.date_publication }}</p>
+                    <p class="card-text">Ajouté par: {{ produit.membre.nom }}</p>  <!-- Membre associé ajouté ici -->
+                    <a href="{% url 'Gestions:produit_detail' produit.pk %}" class="btn btn-info">Détails</a>
+                    <a href="{% url 'Gestions:produit_update' produit.pk %}" class="btn btn-warning">Modifier</a>
+                    <form action="{% url 'Gestions:produit_delete' produit.pk %}" method="post" style="display:inline;">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger">Supprimer</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

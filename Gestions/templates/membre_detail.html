@@ -1,0 +1,14 @@
+<!-- templates/gestion/membre_detail.html -->
+{% extends 'base.html' %}
+
+{% block title %}Détail du Membre{% endblock %}
+
+{%load static%}
+{% block content %}
+<h2>Détail du Membre</h2>
+<p><strong>Nom :</strong> {{ membre.nom }}</p>
+<p><strong>Email :</strong> {{ membre.email }}</p>
+<p><strong>Téléphone :</strong> {{ membre.telephone }}</p>
+<a href="{% url 'Gestions:membre_update' membre.pk %}" class="btn btn-primary">Modifier</a>
+<a href="{% url 'Gestions:membre_list' %}" class="btn btn-secondary">Retour à la liste</a>
+{% endblock %}

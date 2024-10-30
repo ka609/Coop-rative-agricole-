@@ -1,0 +1,16 @@
+<!-- templates/gestion/membre_delete.html -->
+{% extends 'base.html' %}
+
+{% block title %}Supprimer Membre{% endblock %}
+
+{%load static%}
+{% block content %}
+<h2>Supprimer Membre</h2>
+<p>Êtes-vous sûr de vouloir supprimer {{ membre.nom }} ?</p>
+<form method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">Supprimer</button>
+    <a href="{% url 'Gestions:membre_list' %}" class="btn btn-secondary">Annuler</a>
+</form>
+{% endblock %}
+

@@ -1,0 +1,15 @@
+<!-- templates/gestion/production_delete.html -->
+{% extends 'base.html' %}
+
+{% block title %}Supprimer la Production{% endblock %}
+
+{%load static%}
+{% block content %}
+<h2>Supprimer Production</h2>
+<p>Êtes-vous sûr de vouloir supprimer {{ production.nom }} ?</p>
+<form method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">Supprimer</button>
+    <a href="{% url 'Gestions:production_list' %}" class="btn btn-secondary">Annuler</a>
+</form>
+{% endblock %}

@@ -1,0 +1,65 @@
+<!-- templates/gestion/membre_list.html -->
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}Liste des Membres{% endblock %}
+
+{% block content %}
+<h2>Liste des Membres</h2>
+
+<!-- Formulaire de filtrage -->
+<form method="GET" class="mb-3">
+    <div class="input-group">
+        <input type="text" name="search" class="form-control" placeholder="Rechercher un membre...">
+        <button class="btn btn-outline-secondary" type="submit">
+            <i class="bi bi-search"></i> Rechercher
+        </button>
+    </div>
+</form>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Pénom</th>
+            <th>Nom</th>
+            <th>Email</th>
+            <th>Téléphone</th>
+            <th>Adresse</th>
+            <th>Role</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for membre in object_list %}
+        <tr>
+            <td>{{ membre.prenom }}</td>
+            <td>{{ membre.nom }}</td>
+            <td>{{ membre.email }}</td>
+            <td>{{ membre.telephone }}</td>
+            <td>{{ membre.adresse }}</td>
+            <td>{{ membre.role}}</td>
+            <td>
+                <a href="{% url 'Gestions:membre_detail' membre.pk %}" class="btn btn-info btn-sm">
+                    <i class="bi bi-eye"></i> Détails
+                </a>
+                <a href="{% url 'Gestions:membre_update' membre.pk %}" class="btn btn-primary btn-sm">
+                    <i class="bi bi-pencil"></i> Modifier
+                </a>
+                <form action="{% url 'Gestions:membre_delete' membre.pk %}" method="post" style="display:inline;">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger btn-sm">
+                        <i class="bi bi-trash"></i> Supprimer
+                    </button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<a href="{% url 'Gestions:membre_create' %}" class="btn btn-success">
+    <i class="bi bi-plus-circle"></i> Ajouter un membre
+</a>
+
+{% endblock %}

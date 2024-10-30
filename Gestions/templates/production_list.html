@@ -1,0 +1,32 @@
+<!-- templates/gestion/production_list.html -->
+{% extends 'base.html' %}
+
+{% block title %}Liste des Productions{% endblock %}
+
+{%load static%}
+{% block content %}
+<h2>Liste des Productions</h2>
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Nom de la Production</th>
+            <th>Date</th>
+            <th>Quantité</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for production in object_list %}
+        <tr>
+            <td>{{ production.nom }}</td>
+            <td>{{ production.date }}</td>
+            <td>{{ production.quantite }}</td>
+            <td>
+                <a href="{% url 'Gestions:production_update' production.pk %}" class="btn btn-primary btn-sm">Modifier</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<a href="{% url 'Gestions:production_create' %}" class="btn btn-success">Ajouter une production</a>
+{% endblock %}

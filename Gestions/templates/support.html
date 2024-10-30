@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}Support{% endblock %}
+
+{%load static%}
+{% block content %}
+<div class="container py-5">
+    <h2 class="text-center">Support</h2>
+    <p class="text-center">Besoin d’aide ? Veuillez consulter notre FAQ ou nous contacter via la page Contact.</p>
+
+    <div class="row mt-4">
+        <div class="col-md-6">
+            <h4>Questions fréquentes</h4>
+            <p>Consultez notre <a href="{% url 'faq' %}">FAQ</a> pour obtenir des réponses aux questions les plus courantes.</p>
+        </div>
+        <div class="col-md-6">
+            <h4>Assistance directe</h4>
+            <p>Si vous avez besoin d'une assistance directe, veuillez nous envoyer un message via la <a href="{% url 'contact' %}">page de contact</a>.</p>
+        </div>
+    </div>
+</div>
+{% endblock %}

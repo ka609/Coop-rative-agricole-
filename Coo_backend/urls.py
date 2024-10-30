@@ -16,19 +16,18 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.conf import settings
+from django.conf.urls.static import static
+from Gestions import views as gestions_views  # Assuming 'Gestions' is your app name
 from . import views
 
 urlpatterns = [
-    path('admin/', admin.site.urls),  # Admin panel
-
-    # Vue index pour la page d'accueil
-    path('', views.index, name='accueil'),  # URL pour la page d'accueil (index.html)
-    path('membres/', include('membres.urls')),
-
-    # Préfixes pour chaque application avec des espaces de noms
-    path('membres/', include(('membres.urls', 'membres'), namespace='membres')),   # Membres URLs avec namespace
-    path('productions/', include(('productions.urls', 'productions'), namespace='productions')),  # Productions URLs
-    path('ventes/', include(('ventes.urls', 'ventes'), namespace='ventes')),  # Ventes URLs
-    path('formations/', include(('formations.urls', 'formations'), namespace='formations')),  # Formations URLs
-
+    path('', views.index, name='index'),
+    path('admin/', admin.site.urls),  # Admin panel URL
+    path('accounts/', include('accounts.urls')),
+    path('Gestions/', include('Gestions.urls')),  # Include URLs from your 'Gestions' app
 ]
+
+# Serve media files during development
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

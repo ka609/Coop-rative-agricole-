@@ -1,0 +1,17 @@
+<!-- templates/gestion/commande_delete.html -->
+{% extends 'base.html' %}
+
+{% block title %}Supprimer la Commande{% endblock %}
+
+{%load static%}
+{% block content %}
+<h2>Supprimer la Commande</h2>
+
+<p>Êtes-vous sûr de vouloir supprimer cette commande : <strong>{{ commande }}</strong> ?</p>
+
+<form method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">Supprimer</button>
+    <a href="{% url 'Gestions:commande_list' %}" class="btn btn-secondary">Annuler</a>
+</form>
+{% endblock %}

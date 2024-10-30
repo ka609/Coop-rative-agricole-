@@ -1,0 +1,15 @@
+<!-- templates/gestion/produit_delete.html -->
+{% extends 'base.html' %}
+
+{% block title %}Supprimer Produit{% endblock %}
+
+{%load static%}
+{% block content %}
+<h2>Supprimer Produit</h2>
+<p>Êtes-vous sûr de vouloir supprimer {{ produit.nom }} ?</p>
+<form method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">Supprimer</button>
+    <a href="{% url 'Gestions:produit_list' %}" class="btn btn-secondary">Annuler</a>
+</form>
+{% endblock %}

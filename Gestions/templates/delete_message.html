@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{%load static%}
+{% block content %}
+<div class="container mt-5">
+    <h2 class="mb-4">Supprimer le message</h2>
+
+    <div class="alert alert-danger">
+        <p>Êtes-vous sûr de vouloir supprimer ce message ? Cette action est irréversible.</p>
+    </div>
+
+    <div class="card mb-4">
+        <div class="card-header bg-danger text-white">
+            Message à supprimer
+        </div>
+        <div class="card-body">
+            <p>{{ message.content }}</p>
+            <p class="text-muted">Posté {{ message.time_since }}</p>
+        </div>
+        <div class="card-footer">
+            <form method="post">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger">
+                    <i class="fas fa-trash"></i> Supprimer
+                </button>
+                <a href="{% url 'Gestions:discussion_detail' message.discussion.id %}" class="btn btn-secondary">
+                    <i class="fas fa-arrow-left"></i> Annuler
+                </a>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

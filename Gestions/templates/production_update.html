@@ -1,0 +1,15 @@
+<!-- templates/gestion/production_update.html -->
+{% extends 'base.html' %}
+
+{% block title %}Modifier la Production{% endblock %}
+
+{%load static%}
+{% block content %}
+<h2>Modifier Production</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Enregistrer</button>
+    <a href="{% url 'Gestions:production_list' %}" class="btn btn-secondary">Annuler</a>
+</form>
+{% endblock %}

@@ -1,0 +1,33 @@
+<!-- templates/gestion/commande_list.html -->
+{% extends 'base.html' %}
+
+{% block title %}Liste des Commandes{% endblock %}
+
+{% block content %}
+<h2>Liste des Commandes</h2>
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Client</th>
+            <th>Produit</th>
+            <th>Date</th>
+            <th>Quantité</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for commande in object_list %}
+        <tr>
+            <td>{{ commande.client }}</td>
+            <td>{{ commande.produit }}</td>
+            <td>{{ commande.date }}</td>
+            <td>{{ commande.quantite }}</td>
+            <td>
+                <a href="{% url 'commande_update' commande.pk %}" class="btn btn-primary btn-sm">Modifier</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<a href="{% url 'commande_create' %}" class="btn btn-success">Ajouter une commande</a>
+{% endblock %}

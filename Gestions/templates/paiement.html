@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}Paiement{% endblock %}
+
+{%load static%}
+{% block content %}
+<h2 class="text-center">Paiement pour {{ vente.produit.nom }}</h2>
+
+<p>Quantité: {{ vente.quantite }}</p>
+<p>Prix Total: {{ vente.prix_total }} €</p>
+
+<form method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-success btn-block">Effectuer le Paiement</button>
+</form>
+{% endblock %}

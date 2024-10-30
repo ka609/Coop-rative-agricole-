@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block title %}Accueil{% endblock %}
+
+{%load static%}
+{% block content %}
+<div class="jumbotron text-center">
+    <h1>Bienvenue à la Coopérative Agricole</h1>
+    <p>Une plateforme pour soutenir les agriculteurs, échanger des connaissances et vendre des produits en ligne.</p>
+</div>
+
+<!-- Section Objectifs -->
+<section class="py-5">
+    <div class="container">
+        <h2 class="text-center">Notre Objectif</h2>
+        <p class="text-center">Aider les agriculteurs à s’épanouir grâce à l’accès à des formations et un marché en ligne sécurisé.</p>
+    </div>
+</section>
+
+<!-- Section Activités récentes -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <h2 class="text-center">Activités récentes</h2>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="chemin/vers/image1.jpg" class="card-img-top" alt="Production récente">
+                    <div class="card-body">
+                        <h5 class="card-title">Nouvelle production</h5>
+                        <p class="card-text">Description d’une nouvelle production.</p>
+                        <a href="#" class="btn btn-primary">Voir plus</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Répéter pour les autres activités -->
+        </div>
+    </div>
+</section>
+{% endblock %}

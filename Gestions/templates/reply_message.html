@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{%load static%}
+{% block content %}
+<div class="container mt-5">
+    <h2 class="mb-4">Répondre à {{ parent_message.created_by.username }}</h2>
+
+    <div class="card mb-4">
+        <div class="card-header bg-info text-white">
+            Message original
+        </div>
+        <div class="card-body">
+            <p>{{ parent_message.content }}</p>
+            <p class="text-muted">Posté {{ parent_message.time_since }}</p>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header bg-primary text-white">
+            Réponse
+        </div>
+        <div class="card-body">
+            <form method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <textarea class="form-control" id="content" name="content" placeholder="Écrire votre réponse..." rows="3"></textarea>
+                </div>
+                <button type="submit" class="btn btn-success mt-2">
+                    <i class="fas fa-reply"></i> Envoyer la réponse
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

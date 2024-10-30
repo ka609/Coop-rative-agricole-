@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{%load static%}
+{% block content %}
+<div class="container">
+    <h2>Connexion</h2>
+    <form method="post" class="form-group">
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+        <div class="form-group">
+            {{ form.username.label_tag }}
+            {{ form.username }}
+        </div>
+        <div class="form-group">
+            {{ form.password.label_tag }}
+            {{ form.password }}
+        </div>
+        <button type="submit" class="btn btn-primary">Se connecter</button>
+    </form>
+    <p>Pas encore inscrit ? <a href="{% url 'accounts:register' %}">Créez un compte</a></p>
+</div>
+{% endblock %}

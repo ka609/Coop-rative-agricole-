@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+
+{%load static%}
+{% block content %}
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-8">
+            <h2 class="mb-4">Forum des Discussions</h2>
+
+            <!-- Liste des discussions -->
+            <div class="card mb-4">
+                <div class="card-header bg-dark text-white">
+                    Discussions récentes
+                </div>
+                <ul class="list-group list-group-flush">
+                    {% for discussion in discussions %}
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <div>
+                            <a href="{% url 'Gestions:discussion_detail' discussion.id %}" class="text-dark">
+                                <h5 class="mb-1">{{ discussion.title }}</h5>
+                            </a>
+                            <small class="text-muted">Publié par {{ discussion.created_by.username }} il y a {{ discussion.created_at|timesince }}</small>
+                        </div>
+                        <span class="badge bg-secondary">{{ discussion.message_set.count }} messages</span>
+                    </li>
+                    {% empty %}
+                    <li class="list-group-item text-center">Aucune discussion pour le moment.</li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <!-- Formulaire pour créer une nouvelle discussion -->
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    Créer une nouvelle discussion
+                </div>
+                <div class="card-body">
+                    <form method="POST" action="{% url 'Gestions:create_discussion'%}">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="title" class="form-label">Titre de la discussion</label>
+                            <input type="text" name="title" class="form-control" id="title" placeholder="Saisir le titre">
+                        </div>
+                        <div class="mb-3">
+                            <label for="content" class="form-label">Message</label>
+                            <textarea name="content" class="form-control" id="content" rows="3" placeholder="Écrire le premier message"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-success">Poster la discussion</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sidebar avec informations supplémentaires -->
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <div class="card-header bg-info text-white">
+                    Statistiques
+                </div>
+                <div class="card-body">
+                    <p><strong>Total des discussions :</strong> {{ discussions.count }}</p>
+                    <p><strong>Total des messages :</strong> {{ total_messages }}</p>
+                    <p><strong>Membres actifs :</strong> {{ active_members }}</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header bg-warning text-white">
+                    Règles du Forum
+                </div>
+                <div class="card-body">
+                    <ul>
+                        <li>Respectez les autres utilisateurs</li>
+                        <li>Pas de spam ni de publicités</li>
+                        <li>Restez courtois et constructif</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

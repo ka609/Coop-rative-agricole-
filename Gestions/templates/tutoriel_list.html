@@ -1,0 +1,34 @@
+<!-- templates/gestion/tutoriel_list.html -->
+{% extends 'base.html' %}
+
+{% block title %}Liste des Tutoriels{% endblock %}
+
+{%load static%}
+{% block content %}
+<h2>Liste des Tutoriels</h2>
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Titre</th>
+            <th>Auteur</th>
+            <th>Date de Publication</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for tutoriel in object_list %}
+        <tr>
+            <td>{{ tutoriel.titre }}</td>
+            <td>{{ tutoriel.auteur }}</td>
+            <td>{{ tutoriel.date_publication }}</td>
+            <td>
+                <a href="{% url 'tutoriel_detail' tutoriel.pk %}" class="btn btn-info btn-sm">Voir</a>
+                <a href="{% url 'tutoriel_update' tutoriel.pk %}" class="btn btn-primary btn-sm">Modifier</a>
+                <a href="{% url 'tutoriel_delete' tutoriel.pk %}" class="btn btn-danger btn-sm">Supprimer</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<a href="{% url 'tutoriel_create' %}" class="btn btn-success">Ajouter un tutoriel</a>
+{% endblock %}

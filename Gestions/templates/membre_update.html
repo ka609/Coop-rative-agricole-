@@ -1,0 +1,14 @@
+<!-- templates/gestion/membre_update.html -->
+{% extends 'base.html' %}
+
+{% block title %}Modifier Membre{% endblock %}
+
+{% block content %}
+<h2>Modifier Membre</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Enregistrer</button>
+    <a href="{% url 'Gestions:membre_list' %}" class="btn btn-secondary">Annuler</a>
+</form>
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block title %}FAQ{% endblock %}
+
+{%load static%}
+{% block content %}
+<div class="container py-5">
+    <h2 class="text-center">Foire aux questions (FAQ)</h2>
+    <div class="accordion mt-4" id="faqAccordion">
+        <div class="card">
+            <div class="card-header" id="headingOne">
+                <h2 class="mb-0">
+                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        Comment puis-je m'inscrire ?
+                    </button>
+                </h2>
+            </div>
+            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#faqAccordion">
+                <div class="card-body">
+                    Vous pouvez vous inscrire en cliquant sur le bouton "Inscription" en haut à droite et remplir le formulaire.
+                </div>
+            </div>
+        </div>
+
+        <!-- Répétez pour d'autres questions -->
+        <div class="card">
+            <div class="card-header" id="headingTwo">
+                <h2 class="mb-0">
+                    <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        Comment acheter des produits ?
+                    </button>
+                </h2>
+            </div>
+            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#faqAccordion">
+                <div class="card-body">
+                    Pour acheter des produits, vous devez vous inscrire en tant qu'utilisateur et naviguer dans la section des produits.
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
