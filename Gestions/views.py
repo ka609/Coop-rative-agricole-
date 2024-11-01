@@ -7,6 +7,10 @@ from .models import Discussion, Message
 from django.contrib.auth.decorators import login_required
 from .utils import time_since_posted
 from django.contrib.auth.models import User
+from django.http import JsonResponse
+from .paydounia import PaydouniaAPI
+from django.contrib import messages
+
 
 
 # Vues pour les Membres
@@ -178,20 +182,15 @@ def index(request):
     return render(request, 'index.html')
 
 def dashboard(request):
-    # Add any relevant data you want to pass to the dashboard here
-    context = {
-        'recent_activities': [
-            {'title': 'Nouvelle commande', 'date': '2024-10-12', 'description': 'Commande de 100 kg de pommes de terre'},
-            {'title': 'Nouveau membre', 'date': '2024-10-10', 'description': 'Inscription de M. Jean Dupont à la coopérative'},
-            {'title': 'Nouvelle formation', 'date': '2024-10-09', 'description': 'Formation sur la gestion de récoltes'}
-        ],
-        'stats': {
-            'total_members': 250,
-            'total_productions': 120,
-            'total_orders': 75,
-        }
-    }
-    return render(request, 'dashboard.html', context)
+    # Vérifiez si l'utilisateur est authentifié
+    if not request.user.is_authenticated:
+        messages.error(request, "Vous devez être connecté pour accéder à votre tableau de bord.")
+        return redirect('index')  # Redirection en cas d'absence d'authentification
+
+    # Affichez les informations de l'utilisateur connecté sans rechercher dans un autre modèle
+    return render(request, 'dashboard.html', {
+        'user': request.user,
+    })
 
 @login_required
 def send_message(request, discussion_id):
@@ -310,4 +309,18 @@ def create_discussion(request):
 
     return render(request, 'create_discussion.html')
 
+# Dans Gestions/views.py
+def create_invoice_view(request):
+    # Instanciez l'API Paydounia avec le mode test activé (ou désactivé selon votre besoin)
+    paydounia_api = PaydouniaAPI(test_mode=True)
 
+    # Exemples de paramètres de la facture
+    amount = 1000  # Montant de la facture
+    currency = "XOF"  # Devise
+    description = "Achat de produits agricoles"
+
+    # Créez une facture en appelant l'API
+    response_data = paydounia_api.create_invoice(amount, currency, description)
+
+    # Vérifiez la réponse et renvoyez un JsonResponse avec les détails
+    return JsonResponse(response_data)

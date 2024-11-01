@@ -2,7 +2,7 @@
 
 {% block title %}Tableau de Bord{% endblock %}
 
-{%load static%}
+{% load static %}
 {% block content %}
 
 <!-- Barre de navigation supérieure -->
@@ -14,21 +14,10 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
-                <li class="nav-item">
-                    <a href="{% url 'Gestions:membre_list' %}" class="nav-link">Membres</a>
-                </li>
-                <li class="nav-item">
-                    <a href="{% url 'Gestions:produit_list' %}" class="nav-link">E-commerce</a>
-                </li>
-                <li class="nav-item">
-                    <a href="{% url 'Gestions:production_list' %}" class="nav-link">Suivi des productions</a>
-                </li>
-                <li class="nav-item">
-                    <a href="{% url 'Gestions:formation_list' %}" class="nav-link">Formations</a>
-                </li>
-                <li class="nav-item">
-                    <a href="{% url 'Gestions:dashboard' %}" class="nav-link">Tableau de bord</a>
-                </li>
+                <li class="nav-item"><a href="{% url 'Gestions:membre_list' %}" class="nav-link">Membres</a></li>
+                <li class="nav-item"><a href="{% url 'Gestions:produit_list' %}" class="nav-link">E-commerce</a></li>
+                <li class="nav-item"><a href="{% url 'Gestions:production_list' %}" class="nav-link">Suivi des productions</a></li>
+                <li class="nav-item"><a href="{% url 'Gestions:formation_list' %}" class="nav-link">Formations</a></li>
             </ul>
         </div>
     </div>
@@ -38,59 +27,69 @@
 <div class="container">
     <div class="row text-center mb-5">
         <div class="col-md-4">
-            <div class="card shadow-sm p-3 mb-5 bg-white rounded">
-                <i class="fas fa-users fa-3x mb-3" style="color: #2980B9;"></i>
-                <h4>Membres inscrits</h4>
-                <p>150 membres</p>
+            <div class="card shadow p-4 mb-4 rounded bg-light text-center">
+                <i class="fas fa-users fa-3x mb-3 text-primary"></i>
+                <h5>Membres inscrits</h5>
+                <p>{{ total_members }} membres</p>
             </div>
         </div>
         <div class="col-md-4">
-            <div class="card shadow-sm p-3 mb-5 bg-white rounded">
-                <i class="fas fa-box fa-3x mb-3" style="color: #27AE60;"></i>
-                <h4>Produits vendus</h4>
-                <p>230 produits</p>
+            <div class="card shadow p-4 mb-4 rounded bg-light text-center">
+                <i class="fas fa-boxes fa-3x mb-3 text-success"></i>
+                <h5>Produits disponibles</h5>
+                <p>{{ produits|length }} produits</p>
             </div>
         </div>
         <div class="col-md-4">
-            <div class="card shadow-sm p-3 mb-5 bg-white rounded">
-                <i class="fas fa-chalkboard-teacher fa-3x mb-3" style="color: #8E44AD;"></i>
-                <h4>Formations offertes</h4>
-                <p>12 formations</p>
+            <div class="card shadow p-4 mb-4 rounded bg-light text-center">
+                <i class="fas fa-chalkboard-teacher fa-3x mb-3 text-warning"></i>
+                <h5>Formations disponibles</h5>
+                <p>{{ formations|length }} formations</p>
             </div>
         </div>
     </div>
-</div>
 
-<!-- Onglets de navigation -->
-<div class="container">
-    <ul class="nav nav-tabs" id="dashboardTabs" role="tablist">
-        <li class="nav-item">
-            <a class="nav-link active" id="membres-tab" data-bs-toggle="tab" href="#membres" role="tab" aria-controls="membres" aria-selected="true">
-                <i class="fas fa-users"></i> Membres
-            </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" id="produits-tab" data-bs-toggle="tab" href="#produits" role="tab" aria-controls="produits" aria-selected="false">
-                <i class="fas fa-box"></i> Produits
-            </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" id="formations-tab" data-bs-toggle="tab" href="#formations" role="tab" aria-controls="formations" aria-selected="false">
-                <i class="fas fa-chalkboard-teacher"></i> Formations
-            </a>
-        </li>
-    </ul>
+    <!-- Informations Personnelles de l'utilisateur -->
+    <div class="row mb-5">
+        <div class="col-md-12">
+            <h3>Bienvenue, {{ user.first_name }} {{ user.last_name }}</h3>
+            <div class="card shadow p-4 mb-4 rounded bg-light">
+                <h5>Informations Personnelles</h5>
+                <p>Email : {{ user.email }}</p>
+                <p>Nom d'utilisateur : {{ user.username }}</p>
+            </div>
+        </div>
+    </div>
 
-    <!-- Contenu des onglets -->
-    <div class="tab-content mt-4" id="dashboardTabContent">
-        <div class="tab-pane fade show active" id="membres" role="tabpanel" aria-labelledby="membres-tab">
-            <p>Liste des membres...</p>
+    <!-- Produits Disponibles -->
+    <div class="row mb-5">
+        <div class="col-md-12">
+            <h5>Produits Disponibles</h5>
+            <div class="card shadow p-4 mb-4 rounded bg-light">
+                <ul>
+                    {% for produit in produits %}
+                        <li>{{ produit.nom }} - {{ produit.description }}</li>
+                    {% empty %}
+                        <p>Aucun produit disponible.</p>
+                    {% endfor %}
+                </ul>
+            </div>
         </div>
-        <div class="tab-pane fade" id="produits" role="tabpanel" aria-labelledby="produits-tab">
-            <p>Liste des produits...</p>
-        </div>
-        <div class="tab-pane fade" id="formations" role="tabpanel" aria-labelledby="formations-tab">
-            <p>Liste des formations...</p>
+    </div>
+
+    <!-- Formations Disponibles -->
+    <div class="row mb-5">
+        <div class="col-md-12">
+            <h5>Formations Disponibles</h5>
+            <div class="card shadow p-4 mb-4 rounded bg-light">
+                <ul>
+                    {% for formation in formations %}
+                        <li>{{ formation.nom }} - {{ formation.description }}</li>
+                    {% empty %}
+                        <p>Aucune formation disponible.</p>
+                    {% endfor %}
+                </ul>
+            </div>
         </div>
     </div>
 </div>

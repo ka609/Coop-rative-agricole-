@@ -1,5 +1,5 @@
-{%load static%}
 <!DOCTYPE html>
+{% load static %}
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
@@ -14,18 +14,18 @@
     <!-- En-tête -->
     <header class="bg-dark text-white py-3">
         <div class="container">
-            <div class="d-flex justify-content-between">
+            <div class="d-flex justify-content-between align-items-center">
                 <h1><a href="{% url 'index' %}" class="text-white">Coopérative Agricole</a></h1>
                 <nav>
                     <ul class="nav">
-                        <li class="nav-item"><a href="{% url 'index' %}" class="nav-link text-white">Accueil</a></li>
+                        <li class="nav-item"><a href="{% url 'index' %}" class="nav-link text-white"><i class="fas fa-home"></i> Accueil</a></li>
                         {% if user.is_authenticated %}
-                            <li class="nav-item"><a href="{% url 'Gestions:forum' %}"class="nav-link text-white">Forum</a></li>
-                            <li class="nav-item"><a href="{% url 'Gestions:dashboard' %}" class="nav-link text-white">Tableau de bord</a></li>
-                             <li class="nav-item"><a href="{% url 'accounts:logout' %}" class="nav-link text-white">Déconnexion</a></li>
+                            <li class="nav-item"><a href="{% url 'Gestions:forum' %}" class="nav-link text-white"><i class="fas fa-comments"></i> Forum</a></li>
+                            <li class="nav-item"><a href="{% url 'Gestions:dashboard' %}" class="nav-link text-white"><i class="fas fa-tachometer-alt"></i> Tableau de bord</a></li>
+                            <li class="nav-item"><a href="{% url 'accounts:logout' %}" class="nav-link text-white"><i class="fas fa-sign-out-alt"></i> Déconnexion</a></li>
                         {% else %}
-                             <li class="nav-item"><a href="{% url 'accounts:register' %}"class="nav-link text-white">Créez un compte</a></li>
-                            <li class="nav-item"><a href="{% url 'accounts:login' %}" class="nav-link text-white">Connexion</a></li>
+                            <li class="nav-item"><a href="{% url 'accounts:register' %}" class="nav-link text-white"><i class="fas fa-user-plus"></i> Créez un compte</a></li>
+                            <li class="nav-item"><a href="{% url 'accounts:login' %}" class="nav-link text-white"><i class="fas fa-sign-in-alt"></i> Connexion</a></li>
                         {% endif %}
                     </ul>
                 </nav>
@@ -50,10 +50,10 @@
                 <div class="col-md-3">
                     <h5>Liens rapides</h5>
                     <ul class="list-unstyled">
-                        <li><a href="{% url 'Gestions:contact' %}" class="text-white">Contact</a></li>
-                        <li><a href="{% url 'Gestions:faq' %}" class="text-white">FAQ</a></li>
-                        <li><a href="{% url 'Gestions:support' %}" class="text-white">Support</a></li>
-                        <li><a href="{% url 'Gestions:legal' %}" class="text-white">Mentions légales</a></li>
+                        <li><a href="{% url 'Gestions:contact' %}" class="text-white"><i class="fas fa-envelope"></i> Contact</a></li>
+                        <li><a href="{% url 'Gestions:faq' %}" class="text-white"><i class="fas fa-question-circle"></i> FAQ</a></li>
+                        <li><a href="{% url 'Gestions:support' %}" class="text-white"><i class="fas fa-headset"></i> Support</a></li>
+                        <li><a href="{% url 'Gestions:legal' %}" class="text-white"><i class="fas fa-file-contract"></i> Mentions légales</a></li>
                     </ul>
                 </div>
                 <div class="col-md-3">
@@ -68,5 +68,10 @@
             <p class="text-center mt-4">© 2024 Coopérative Agricole</p>
         </div>
     </footer>
+
+    <!-- Bootstrap JS et jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.7/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

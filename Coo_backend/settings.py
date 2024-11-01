@@ -1,25 +1,19 @@
-import os
 from pathlib import Path
+import os
 import dj_database_url
-import environ
+from decouple import config
 
-# Initialiser l'environnement
-env = environ.Env(
-    DEBUG=(bool, False)
-)
-environ.Env.read_env()  # Charger les variables d'environnement depuis .env si disponible
-
-# Dossier principal du projet
+# Base directory
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# Clé secrète sécurisée pour la production
-SECRET_KEY = env('SECRET_KEY', default='unsafe-default-key')
+# Clé secrète
+SECRET_KEY = config('SECRET_KEY', default='your-default-secret-key')
 
-# Mode debug pour le développement uniquement
-DEBUG = env('DEBUG')
+# Mode Debug
+DEBUG = config('DEBUG', default=False, cast=bool)
 
-# Domaines autorisés (ajoutez votre domaine Heroku ici)
-ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=['localhost', '127.0.0.1', 'monapp.herokuapp.com'])
+# Hôtes autorisés
+ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='').split(',')
 
 # Applications installées
 INSTALLED_APPS = [
@@ -32,12 +26,11 @@ INSTALLED_APPS = [
     'Gestions.apps.GestionsConfig',
     'accounts.apps.AccountsConfig',
     'crispy_forms',
-    'crispy_bootstrap4',
+    'crispy_bootstrap4'
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
-# Middlewares
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -50,7 +43,7 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'Coo_backend.urls'
 
-# Configuration des templates
+# Templates
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -69,16 +62,12 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'Coo_backend.wsgi.application'
 
-# Configuration de la base de données PostgreSQL pour Heroku
+# Base de données
 DATABASES = {
-    'default': dj_database_url.config(
-        default=env('DATABASE_URL', default='postgres://postgres:projet2024@localhost:5432/postgres'),
-        conn_max_age=600,
-        ssl_require=True
-    )
+    'default': dj_database_url.config(default=config('DATABASE_URL'))
 }
 
-# Validation des mots de passe
+# Validation du mot de passe
 AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
     {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator'},
@@ -86,46 +75,35 @@ AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'},
 ]
 
-# Paramètres de localisation
+# Internationalisation
 LANGUAGE_CODE = 'fr-FR'
 TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_TZ = True
 
-# Gestion des fichiers statiques
-STATIC_URL = '/static/'
-STATIC_ROOT = BASE_DIR / 'staticfiles'
-STATICFILES_DIRS = [BASE_DIR / 'static']
-
-# Fichiers médias
+# Fichiers statiques et média
+STATIC_URL = 'static/'
+STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-# Paramètres de sécurité pour Heroku
-SESSION_COOKIE_SECURE = not DEBUG
-CSRF_COOKIE_SECURE = not DEBUG
-SECURE_SSL_REDIRECT = not DEBUG
-X_FRAME_OPTIONS = 'DENY'
+# Clé primaire par défaut
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# Configuration de l'email via SMTP
+# Configuration de l'email
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-EMAIL_HOST_USER = env('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
+EMAIL_HOST = config('EMAIL_HOST', default='smtp.gmail.com')
+EMAIL_PORT = config('EMAIL_PORT', default=587, cast=int)
+EMAIL_USE_TLS = config('EMAIL_USE_TLS', default=True, cast=bool)
+EMAIL_HOST_USER = config('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
-# Paramètres des messages
-from django.contrib.messages import constants as messages
+# l'API paydounia
+PAYDOUNIA_TEST_PUBLIC_KEY = config('PAYDOUNIA_TEST_PUBLIC_KEY')
 
-MESSAGE_TAGS = {
-    messages.DEBUG: 'debug',
-    messages.INFO: 'info',
-    messages.SUCCESS: 'success',
-    messages.WARNING: 'warning',
-    messages.ERROR: 'error',
-}
+PAYDOUNIA_MASTER_KEY = config('PAYDOUNIA_MASTER_KEY')
+PAYDOUNIA_PRIVATE_KEY = config('PAYDOUNIA_PRIVATE_KEY')
+PAYDOUNIA_TOKEN = config('PAYDOUNIA_TOKEN')
 
-# Défaut pour le champ clé primaire
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

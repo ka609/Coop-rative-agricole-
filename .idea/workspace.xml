@@ -5,77 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bd2bf241-c1f0-4f59-b067-7e3010c38741" name="Changes" comment="changement">
-      <change afterPath="$PROJECT_DIR$/Gestions/templates/commande_delete.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Gestions/templates/commande_update.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Gestions/templates/create_discussion.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Gestions/templates/dashboard.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Gestions/templates/delete_message.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Gestions/templates/devenir_membre.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Gestions/templates/discussion_detail.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Gestions/templates/edit_message.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Gestions/templates/formation_create.htm.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Gestions/templates/formation_list.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Gestions/templates/forum.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Gestions/templates/inscription.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Gestions/templates/paiement.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Gestions/templates/reply_message.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Gestions/templates/send_message.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/accounts/templates/login.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/accounts/templates/logout.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/accounts/templates/register.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/Coo_backend.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Coo_backend.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Gestions/paydounia.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Gestions/signals.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Coo_backend/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/Coo_backend/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Coo_backend/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/Coo_backend/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/formations/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/Gestions/decorators.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/formations/admin.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/formations/apps.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/formations/migrations/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/Gestions/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/formations/models.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/formations/tests.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/formations/urls.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/formations/views.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/membres/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/Gestions/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/membres/admin.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/membres/apps.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/membres/forms.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/membres/migrations/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/Gestions/utils.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/membres/models.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/membres/templates/Profil.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/membres/templates/create_thread.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/membres/templates/forum.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/membres/templates/login.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/membres/templates/password_reset.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/membres/templates/password_reset_complete.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/membres/templates/password_reset_confirm.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/membres/templates/password_reset_done.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/membres/templates/register.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/membres/templates/thread_detail.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/membres/tests.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/membres/urls.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/membres/views.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/productions/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/accounts/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/productions/admin.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/productions/apps.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/productions/migrations/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/accounts/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/productions/models.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/productions/templates/catalogue_produits.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/productions/tests.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/productions/urls.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/productions/views.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gestions/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/Gestions/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gestions/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/Gestions/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gestions/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Gestions/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/Dashboard.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/Dashboard.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ventes/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ventes/admin.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ventes/apps.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ventes/migrations/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ventes/models.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ventes/templates/detail_commande.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ventes/templates/detail_panier.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ventes/templates/liste_transactions.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ventes/tests.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ventes/urls.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ventes/views.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -89,8 +29,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Python Unit Test" />
-        <option value="Python Script" />
         <option value="HTML File" />
+        <option value="Python Script" />
       </list>
     </option>
   </component>
@@ -109,6 +49,9 @@
     &quot;accountId&quot;: &quot;a6f23993-dd83-4220-835a-d34757dbd854&quot;
   }
 }</component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 6
 }</component>
@@ -120,22 +63,22 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "DefaultHtmlFileTemplate": "HTML File",
-    "RunOnceActivity.OpenDjangoStructureViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
-    "last_opened_file_path": "C:/Users/Kassongo Moussa/PycharmProjects/Coop-rative-agricole-",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;RunOnceActivity.OpenDjangoStructureViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Kassongo Moussa/PycharmProjects/Coop-rative-agricole-&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Kassongo Moussa\PycharmProjects\Coop-rative-agricole-\Gestions\templates" />
@@ -143,6 +86,9 @@
       <recent name="C:\Users\Kassongo Moussa\PycharmProjects\Coop-rative-agricole-\membres\templates" />
       <recent name="C:\Users\Kassongo Moussa\PycharmProjects\Coop-rative-agricole-\formations\templates" />
       <recent name="C:\Users\Kassongo Moussa\PycharmProjects\Coop-rative-agricole-\formations\templates\formations" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Kassongo Moussa\PycharmProjects\Coop-rative-agricole-\Gestions" />
     </key>
   </component>
   <component name="SharedIndexes">
@@ -188,6 +134,8 @@
       <workItem from="1728836580692" duration="24750000" />
       <workItem from="1728894064251" duration="20639000" />
       <workItem from="1729423081658" duration="2576000" />
+      <workItem from="1730331715852" duration="293000" />
+      <workItem from="1730362612695" duration="233000" />
     </task>
     <task id="LOCAL-00001" summary="modifié">
       <option name="closed" value="true" />

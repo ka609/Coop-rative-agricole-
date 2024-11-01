@@ -5,6 +5,7 @@ from django.db import models
 from django.utils import timezone
 
 class Membre(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True)
     nom = models.CharField(max_length=100)
     prenom = models.CharField(max_length=100)
     email = models.EmailField(unique=True)

@@ -5,6 +5,7 @@ app_name='Gestions'
 
 urlpatterns = [
     path('', views.index, name='index'),
+    path('create-invoice/', views.create_invoice_view, name='create-invoice'),
     path('contact/', views.contact, name='contact'),
     path('faq/', views.faq, name='faq'),
     path('support/', views.support, name='support'),

@@ -2,18 +2,35 @@
 
 {% block title %}Accueil{% endblock %}
 
-{%load static%}
+{% load static %}
 {% block content %}
-<div class="jumbotron text-center">
-    <h1>Bienvenue à la Coopérative Agricole</h1>
-    <p>Une plateforme pour soutenir les agriculteurs, échanger des connaissances et vendre des produits en ligne.</p>
+<div class="jumbotron text-center bg-primary text-white">
+    <h1 class="display-4">Bienvenue à la Coopérative Agricole</h1>
+    <p class="lead">Une plateforme pour soutenir les agriculteurs, échanger des connaissances et vendre des produits en ligne.</p>
 </div>
 
 <!-- Section Objectifs -->
 <section class="py-5">
     <div class="container">
         <h2 class="text-center">Notre Objectif</h2>
-        <p class="text-center">Aider les agriculteurs à s’épanouir grâce à l’accès à des formations et un marché en ligne sécurisé.</p>
+        <p class="text-center mb-5">Aider les agriculteurs à s’épanouir grâce à l’accès à des formations et un marché en ligne sécurisé.</p>
+        <div class="row">
+            <div class="col-md-4 text-center">
+                <img src="{% static 'images/formation.jpg' %}" class="rounded-circle" alt="Formation" width="80%">
+                <h4 class="mt-3">Formations</h4>
+                <p>Apprenez de nouvelles techniques agricoles avec nos tutoriels et cours vidéo.</p>
+            </div>
+            <div class="col-md-4 text-center">
+                <img src="{% static 'images/ecommerce.jpg' %}" class="rounded-circle" alt="E-commerce" width="80%">
+                <h4 class="mt-3">E-commerce</h4>
+                <p>Accédez à un marché en ligne sécurisé pour acheter et vendre vos produits.</p>
+            </div>
+            <div class="col-md-4 text-center">
+                <img src="{% static 'images/suivi_production.jpg' %}" class="rounded-circle" alt="Suivi de production" width="80%">
+                <h4 class="mt-3">Suivi de Production</h4>
+                <p>Suivez l’évolution de vos cultures pour maximiser les rendements.</p>
+            </div>
+        </div>
     </div>
 </section>
 
@@ -23,16 +40,35 @@
         <h2 class="text-center">Activités récentes</h2>
         <div class="row">
             <div class="col-md-4">
-                <div class="card">
-                    <img src="chemin/vers/image1.jpg" class="card-img-top" alt="Production récente">
+                <div class="card mb-4 shadow-sm">
+                    <img src="{% static 'images/recent_activity1.jpg' %}" class="card-img-top" alt="Production récente">
                     <div class="card-body">
                         <h5 class="card-title">Nouvelle production</h5>
-                        <p class="card-text">Description d’une nouvelle production.</p>
+                        <p class="card-text">Description d’une nouvelle production, avec des détails sur les techniques utilisées.</p>
                         <a href="#" class="btn btn-primary">Voir plus</a>
                     </div>
                 </div>
             </div>
-            <!-- Répéter pour les autres activités -->
+            <div class="col-md-4">
+                <div class="card mb-4 shadow-sm">
+                    <img src="{% static 'images/recent_activity2.jpg' %}" class="card-img-top" alt="Nouvelle formation">
+                    <div class="card-body">
+                        <h5 class="card-title">Nouvelle formation</h5>
+                        <p class="card-text">Découvrez notre dernière formation sur les pratiques agricoles modernes.</p>
+                        <a href="#" class="btn btn-primary">Voir plus</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card mb-4 shadow-sm">
+                    <img src="{% static 'images/recent_activity3.jpg' %}" class="card-img-top" alt="Événement">
+                    <div class="card-body">
+                        <h5 class="card-title">Événement coopératif</h5>
+                        <p class="card-text">Participez à notre prochain événement pour rencontrer d’autres agriculteurs.</p>
+                        <a href="#" class="btn btn-primary">Voir plus</a>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </section>
