@@ -42,19 +42,23 @@ urlpatterns = [
 
     # URLs pour la formation en ligne
     path('formations/', views.FormationListView.as_view(), name='formation_list'),  # Liste des formations
-    #path('formations/<int:pk>/', views.FormationDetailView.as_view(), name='formation_detail'),  # Détail d'une formation
+    path('formations/<int:pk>/', views.FormationDetailView.as_view(), name='formation_detail'),  # Détail d'une formation
     path('formations/ajouter/', views.FormationCreateView.as_view(), name='formation_create'),  # Ajout d'une formation
-    #path('formations/<int:pk>/modifier/', views.FormationUpdateView.as_view(), name='formation_update'),  # Modification d'une formation
-    #path('formations/<int:pk>/supprimer/', views.FormationDeleteView.as_view(), name='formation_delete'),  # Suppression d'une formation
+    path('formations/<int:pk>/modifier/', views.FormationUpdateView.as_view(), name='formation_update'),  # Modification d'une formation
+    path('formations/<int:pk>/supprimer/', views.FormationDeleteView.as_view(), name='formation_delete'),  # Suppression d'une formation
 
 
     path('commandes/', views.CommandeListView.as_view(), name='commande_list'),
     path('commandes/nouveau/', views.CommandeCreateView.as_view(), name='commande_create'),
-path('commandes/<int:pk>/modifier/', views.CommandeUpdateView.as_view(), name='commande_update'),
+  path('commandes/<int:pk>/modifier/', views.CommandeUpdateView.as_view(), name='commande_update'),
     path('commandes/<int:pk>/', views.CommandeDetailView.as_view(), name='commande_detail'),
     path('commandes/<int:pk>/supprimer/', views.CommandeDeleteView.as_view(), name='commande_delete'),
 
     # URLs pour les tutoriels
     path('tutoriels/', views.TutorielListView.as_view(), name='tutoriel_list'),
     path('tutoriels/nouveau/', views.TutorielCreateView.as_view(), name='tutoriel_create'),
+    path('tutoriels/<int:pk>/modifier/', views.TutorielUpdateView.as_view(), name='tutoriel_update'),
+    path('tutoriels/<int:pk>/', views.TutorielDetailView.as_view(), name='tutoriel_detail'),
+    path('tutoriels/<int:pk>/supprimer/', views.TutorielDeleteView.as_view(), name='tutoriel_delete'),
 ]
+

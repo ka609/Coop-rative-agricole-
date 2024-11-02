@@ -152,6 +152,23 @@ class FormationCreateView(CreateView):
     template_name = 'formation_create.html'
     success_url = reverse_lazy('Gestions:formation_list')
 
+# Vue pour mettre à jour une formation
+class FormationUpdateView(UpdateView):
+    model = Formation
+    form_class = FormationForm
+    template_name = 'formation_update.html'
+    success_url = reverse_lazy('Gestions:formation_list')
+
+# Vue pour supprimer une formation
+class FormationDeleteView(DeleteView):
+    model = Formation
+    template_name = 'formation_delete.html'
+    success_url = reverse_lazy('Gestions:formation_list')
+
+# Vue pour afficher le détail d'une formation
+class FormationDetailView(DetailView):
+    model = Formation
+    template_name = 'formation_detail.html'
 
 # Vues pour les Tutoriels
 class TutorielListView(ListView):
@@ -165,6 +182,22 @@ class TutorielCreateView(CreateView):
     template_name = 'tutoriel_create.html'
     success_url = reverse_lazy('Gestions:tutoriel_list')
 
+class TutorielUpdateView(UpdateView):
+    model = Tutoriel
+    form_class = TutorielForm
+    template_name = 'tutoriel_update.html'
+    success_url = reverse_lazy('Gestions:tutoriel_list')
+
+
+class TutorielDetailView(DetailView):
+    model = Tutoriel
+    template_name = 'tutoriel_detail.html'
+
+
+class TutorielDeleteView(DeleteView):
+    model = Tutoriel
+    template_name = 'tutoriel_delete.html'
+    success_url = reverse_lazy('Gestions:tutoriel_list')
 
 def contact(request):
     return render(request, 'contact.html')

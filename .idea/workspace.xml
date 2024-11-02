@@ -5,8 +5,32 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bd2bf241-c1f0-4f59-b067-7e3010c38741" name="Changes" comment="changement">
+      <change afterPath="$PROJECT_DIR$/Gestions/templates/formation_create.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Gestions/templates/tutoriel_detail.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Gestions/templates/tutoriel_update.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/accounts/templates/password_reset.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/accounts/templates/password_reset_complete.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/accounts/templates/password_reset_confirm.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/accounts/templates/password_reset_done.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Coo_backend/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/Coo_backend/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gestions/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/Gestions/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gestions/templates/commande_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/Gestions/templates/commande_list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gestions/templates/formation_create.htm.html" beforeDir="false" afterPath="$PROJECT_DIR$/Gestions/templates/tutoriel_delete.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gestions/templates/formation_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/Gestions/templates/formation_list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gestions/templates/produit_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/Gestions/templates/produit_list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gestions/templates/tutoriel_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/Gestions/templates/tutoriel_list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gestions/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/Gestions/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gestions/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Gestions/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/accounts/templates/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/accounts/templates/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/accounts/templates/logout.html" beforeDir="false" afterPath="$PROJECT_DIR$/accounts/templates/logout.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/accounts/templates/register.html" beforeDir="false" afterPath="$PROJECT_DIR$/accounts/templates/register.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/accounts/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/accounts/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/images/agriculture.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/static/images/suivi_production.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/images/market.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/static/images/ecommerce.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/Dashboard.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/Dashboard.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,8 +44,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Python Unit Test" />
-        <option value="HTML File" />
         <option value="Python Script" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>

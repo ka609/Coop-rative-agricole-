@@ -1,10 +1,17 @@
 {% extends 'base.html' %}
 
-{%load static%}
+{% load static %}
 {% block content %}
 <div class="container">
     <h2>Déconnexion réussie</h2>
+    {% if messages %}
+        <div class="alert alert-info" role="alert">
+            {% for message in messages %}
+                <p>{{ message }}</p>
+            {% endfor %}
+        </div>
+    {% endif %}
     <p>Vous avez été déconnecté avec succès.</p>
-    <p><a href="{% url 'login' %}">Se reconnecter</a></p>
+    <p><a href="{% url 'accounts:login' %}" class="btn btn-primary">Se reconnecter</a></p>
 </div>
 {% endblock %}

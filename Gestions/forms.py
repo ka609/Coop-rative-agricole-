@@ -23,13 +23,23 @@ class ProduitForm(forms.ModelForm):
 class CommandeForm(forms.ModelForm):
     class Meta:
         model = Commande
-        fields = ['produit', 'quantite','status']
+        fields = ['acheteur', 'produit', 'quantite', 'status']  # Inclut tous les champs du modèle
+        widgets = {
+            'status': forms.Select(choices=[('en_cours', 'En cours'), ('livrée', 'Livrée'), ('annulée', 'Annulée')]),
+        }
 
 # Formulaire pour le modèle Formation
 class FormationForm(forms.ModelForm):
     class Meta:
         model = Formation
         fields = ['titre', 'description', 'date_debut', 'date_fin', 'formateur']
+        widgets = {
+            'titre': forms.TextInput(attrs={'class': 'form-control mb-3', 'placeholder': 'Titre de la formation'}),
+            'description': forms.Textarea(attrs={'class': 'form-control mb-3', 'rows': 4, 'placeholder': 'Description'}),
+            'date_debut': forms.DateInput(attrs={'class': 'form-control mb-3', 'type': 'date'}),
+            'date_fin': forms.DateInput(attrs={'class': 'form-control mb-3', 'type': 'date'}),
+            'formateur': forms.Select(attrs={'class': 'form-control mb-3'}),
+        }
 
 # Formulaire pour le modèle Tutoriel
 class TutorielForm(forms.ModelForm):
