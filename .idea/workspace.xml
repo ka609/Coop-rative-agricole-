@@ -6,7 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="bd2bf241-c1f0-4f59-b067-7e3010c38741" name="Changes" comment="changement">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/Dashboard.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/dashboard.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Coo_backend/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/Coo_backend/settings.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,7 +59,7 @@
     "DefaultHtmlFileTemplate": "HTML File",
     "RunOnceActivity.OpenDjangoStructureViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "Merging main",
+    "git-widget-placeholder": "main",
     "last_opened_file_path": "C:/Users/Kassongo Moussa/PycharmProjects/Coop-rative-agricole-",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
