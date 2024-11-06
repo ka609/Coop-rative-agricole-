@@ -107,16 +107,16 @@ SESSION_COOKIE_AGE = 3600  # 1 heure en secondes
 SESSION_EXPIRE_AT_BROWSER_CLOSE = False
 
 #les caches
-#CACHES = {
-    #'default': {
-       # 'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
-       # 'LOCATION': 'unique-snowflake',
-  #  }
-#}
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+        'LOCATION': 'unique-snowflake',
+   }
+}
 
-#SECURE_SSL_REDIRECT = False
-#SESSION_COOKIE_SECURE = False
-#CSRF_COOKIE_SECURE = False
+SECURE_SSL_REDIRECT = False
+SESSION_COOKIE_SECURE = False
+CSRF_COOKIE_SECURE = False
 
 
 # l'API paydounia
