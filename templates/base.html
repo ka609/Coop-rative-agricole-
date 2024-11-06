@@ -20,14 +20,14 @@
                 <nav>
                     <ul class="nav flex-column flex-md-row">
                         <li class="nav-item"><a href="{% url 'index' %}" class="nav-link text-white"><i class="fas fa-home"></i> Accueil</a></li>
-                        {% if user.is_authenticated %}
+                         {% if user.is_authenticated %}
                             <li class="nav-item"><a href="{% url 'Gestions:forum' %}" class="nav-link text-white"><i class="fas fa-comments"></i> Forum</a></li>
                             <li class="nav-item"><a href="{% url 'Gestions:dashboard' %}" class="nav-link text-white"><i class="fas fa-tachometer-alt"></i> Tableau de bord</a></li>
                             <li class="nav-item"><a href="{% url 'accounts:logout' %}" class="nav-link text-white"><i class="fas fa-sign-out-alt"></i> Déconnexion</a></li>
-                        {% else %}
+                           {%else%}
                             <li class="nav-item"><a href="{% url 'accounts:register' %}" class="nav-link text-white"><i class="fas fa-user-plus"></i> Créer un compte</a></li>
                             <li class="nav-item"><a href="{% url 'accounts:login' %}" class="nav-link text-white"><i class="fas fa-sign-in-alt"></i> Connexion</a></li>
-                        {% endif %}
+                        {%endif%}
                     </ul>
                 </nav>
             </div>

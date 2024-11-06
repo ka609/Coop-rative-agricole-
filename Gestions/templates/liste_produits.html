@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Produits disponibles</h2>
+<ul>
+    {% for produit in produits %}
+        <li>
+            <h3>{{ produit.nom }}</h3>
+            <p>{{ produit.description }}</p>
+            <p>Prix: {{ produit.prix }} FCFA</p>
+            <a href="{% url 'creer_facture' produit.id %}" class="btn btn-success">Acheter</a>
+        </li>
+    {% endfor %}
+</ul>
+{% endblock %}

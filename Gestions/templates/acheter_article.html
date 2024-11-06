@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="card">
+        <div class="card-body text-center">
+            <h3 class="card-title">Confirmer la commande de l'article</h3>
+            <hr>
+            <h4 class="text-primary">{{ article.nom }}</h4>
+            <img src="{{ article.photo.url }}" class="img-fluid rounded mb-3" alt="{{ article.nom }}" style="max-width: 300px;">
+            <p class="text-muted">Prix : <strong>{{ article.prix }} FCFA</strong></p>
+            <p class="card-text">{{ article.description }}</p>
+
+            <!-- Formulaire de confirmation de commande -->
+            <form method="post" action="{% url 'Gestions:acheter_article' article.id %}">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-success">Confirmer la commande</button>
+                <a href="{% url 'Gestions:ecommerce' %}" class="btn btn-secondary">Annuler</a>
+            </form>
+
+            <!-- Bouton de paiement si la commande est confirmée -->
+            {% if request.GET.confirmed == "true" %}
+                <a href="{% url 'Gestions:creer_facture' article.id %}" class="btn btn-primary mt-3">Procéder au paiement</a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

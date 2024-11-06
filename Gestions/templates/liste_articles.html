@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Produits disponibles</h2>
+<ul>
+    {% for article in articles %}  {# Changer 'produits' en 'articles' #}
+        <li>
+            <h3>{{ article.nom }}</h3>  {# Changer 'produit' en 'article' #}
+            <p>{{ article.description }}</p>  {# Changer 'produit' en 'article' #}
+            <p>Prix: {{ article.prix }} FCFA</p>  {# Changer 'produit' en 'article' #}
+            <a href="{% url 'creer_facture' article.id %}" class="btn btn-success">Acheter</a>  {# Changer 'produit' en 'article' #}
+        </li>
+    {% endfor %}
+</ul>
+{% endblock %}

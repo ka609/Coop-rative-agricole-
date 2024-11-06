@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Liste des Productions</h2>
+    <div class="row">
+        {% for production in productions %}
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <img src="{{ production.photo.url }}" class="card-img-top" alt="{{ production.type_culture }}">
+                <div class="card-body">
+                    <h5 class="card-title">{{ production.type_culture }}</h5>
+                    <p class="card-text">Membre: {{ production.membre.prenom }} {{ production.membre.nom }}</p>
+                    <p class="card-text">Date de plantation: {{ production.date_plantation }}</p>
+                    <p class="card-text">Récolte prévue: {{ production.date_recolte_prevue }}</p>
+                    <p class="card-text">État actuel: {{ production.etat_actuel }}</p>
+                    <a href="{% url 'detail_production' production.id %}" class="btn btn-primary">Détails</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

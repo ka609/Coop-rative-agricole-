@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-center">Créer une Nouvelle Formation</h2>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="card">
+            <div class="card-body">
+                {{ form.as_p }}
+                <button type="submit" class="btn btn-success">Créer la formation</button>
+                <a href="{% url 'Gestions:liste_formations' %}" class="btn btn-secondary">Annuler</a>
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock %}

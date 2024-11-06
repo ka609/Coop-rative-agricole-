@@ -15,10 +15,10 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item"><a href="{% url 'Gestions:membre_list' %}" class="nav-link">Membres</a></li>
-                <li class="nav-item"><a href="{% url 'Gestions:produit_list' %}" class="nav-link">E-commerce</a></li>
-                <li class="nav-item"><a href="{% url 'Gestions:production_list' %}" class="nav-link">Suivi des productions</a></li>
-                <li class="nav-item"><a href="{% url 'Gestions:formation_list' %}" class="nav-link">Formations</a></li>
-                <li class="nav-item"><a href="{% url 'Gestions:commande_list' %}" class="nav-link">Liste de commandes</a></li>
+                <li class="nav-item"><a href="{% url 'Gestions:ecommerce' %}" class="nav-link">E-commerce</a></li>
+                <!-- Ajout des liens vers les vues de productions et formations -->
+                <li class="nav-item"><a href="{% url 'Gestions:suivi_agricole' %}" class="nav-link">Suivi Agricole</a></li>
+                <li class="nav-item"><a href="{% url 'Gestions:liste_formations' %}" class="nav-link">Formations</a></li>
             </ul>
         </div>
     </div>
@@ -27,25 +27,30 @@
 <!-- Widgets centraux -->
 <div class="container">
     <div class="row text-center mb-5">
-        <div class="col-md-4">
-            <div class="card shadow p-4 mb-4 rounded bg-light text-center">
+        <!-- Total des membres inscrits -->
+        <div class="col-lg-4 col-md-6 mb-4">
+            <div class="card shadow p-4 rounded bg-light text-center">
                 <i class="fas fa-users fa-3x mb-3 text-primary"></i>
                 <h5>Membres inscrits</h5>
-                <p>{{ total_members }} membres</p>
+                <p>{{ total_members }} membres</p>  <!-- Utilise total_members pour l'affichage -->
             </div>
         </div>
-        <div class="col-md-4">
-            <div class="card shadow p-4 mb-4 rounded bg-light text-center">
+
+        <!-- Total des articles disponibles -->
+        <div class="col-lg-4 col-md-6 mb-4">
+            <div class="card shadow p-4 rounded bg-light text-center">
                 <i class="fas fa-boxes fa-3x mb-3 text-success"></i>
-                <h5>Produits disponibles</h5>
-                <p>{{ produits|length }} produits</p>
+                <h5>Articles disponibles</h5>
+                <p>{{ articles|length }} articles</p> <!-- Affiche le nombre total d'articles -->
             </div>
         </div>
-        <div class="col-md-4">
-            <div class="card shadow p-4 mb-4 rounded bg-light text-center">
+
+        <!-- Total des formations disponibles -->
+        <div class="col-lg-4 col-md-6 mb-4">
+            <div class="card shadow p-4 rounded bg-light text-center">
                 <i class="fas fa-chalkboard-teacher fa-3x mb-3 text-warning"></i>
                 <h5>Formations disponibles</h5>
-                <p>{{ formations|length }} formations</p>
+                <p>{{ total_formations }} formations</p> <!-- Utilise total_formations pour l'affichage -->
             </div>
         </div>
     </div>
@@ -54,24 +59,36 @@
     <div class="row mb-5">
         <div class="col-md-12">
             <h3>Bienvenue, {{ user.first_name }} {{ user.last_name }}</h3>
-            <div class="card shadow p-4 mb-4 rounded bg-light">
+            <div class="card shadow p-4 rounded bg-light">
                 <h5>Informations Personnelles</h5>
                 <p>Email : {{ user.email }}</p>
                 <p>Nom d'utilisateur : {{ user.username }}</p>
             </div>
         </div>
-    </div>
+    </div> <!-- Fin de la section Informations Personnelles -->
 
-    <!-- Produits Disponibles -->
+    <!-- Articles Publiés -->
     <div class="row mb-5">
         <div class="col-md-12">
-            <h5>Produits Disponibles</h5>
-            <div class="card shadow p-4 mb-4 rounded bg-light">
-                <ul>
-                    {% for produit in produits %}
-                        <li>{{ produit.nom }} - {{ produit.description }}</li>
+            <h5>Articles Publiés</h5>
+            <a href="{% url 'Gestions:publier_article' %}" class="btn btn-success">Publier un Article</a>
+            <div class="card shadow p-4 rounded bg-light">
+                <ul class="list-unstyled">
+                    {% for article in articles %}
+                        <li class="mb-3">
+                            <h6>{{ article.nom }}</h6>
+                            <p>{{ article.description }}</p>
+                            <p>Prix : {{ article.prix }} FCFA</p>
+                            {% if article.photo %}
+                                <img src="{{ article.photo.url }}" alt="Photo de {{ article.nom }}" class="img-thumbnail mb-2" style="max-width: 150px;">
+                            {% endif %}
+                            <br>
+                            <small class="text-muted">Publié il y a {{ article.date_publication|timesince }}.</small>
+                            <br>
+                            <a href="{% url 'Gestions:creer_facture' article.id %}" class="btn btn-primary mt-2">Payer</a>
+                        </li>
                     {% empty %}
-                        <p>Aucun produit disponible.</p>
+                        <p>Aucun article publié.</p>
                     {% endfor %}
                 </ul>
             </div>
@@ -82,8 +99,8 @@
     <div class="row mb-5">
         <div class="col-md-12">
             <h5>Formations Disponibles</h5>
-            <div class="card shadow p-4 mb-4 rounded bg-light">
-                <ul>
+            <div class="card shadow p-4 rounded bg-light">
+                <ul class="list-unstyled">
                     {% for formation in formations %}
                         <li>{{ formation.nom }} - {{ formation.description }}</li>
                     {% empty %}

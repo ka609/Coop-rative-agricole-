@@ -1,5 +1,5 @@
 from django import forms
-from .models import Membre, Production, Produit, Commande, Formation, Tutoriel, Quiz, Question, Reponse, InscriptionFormation
+from .models import Membre,Article, Formation,ProductionAgricole
 
 # Formulaire pour le modèle Membre
 class MembreForm(forms.ModelForm):
@@ -7,66 +7,35 @@ class MembreForm(forms.ModelForm):
         model = Membre
         fields = ['prenom', 'nom', 'email', 'telephone', 'adresse', 'role']
 
-# Formulaire pour le modèle Production
-class ProductionForm(forms.ModelForm):
-    class Meta:
-        model = Production
-        fields = ['type_culture', 'date_plantation', 'date_recolte_prevue', 'etat_actuel']
 
-# Formulaire pour le modèle Produit (ajout d'un produit à vendre)
-class ProduitForm(forms.ModelForm):
+class ProductionAgricoleForm(forms.ModelForm):
     class Meta:
-        model = Produit
-        fields = ['nom', 'description', 'prix', 'stock', 'photo','membre']  # Ajout du champ photo
-
-# Formulaire pour le modèle Commande (achat d'un produit)
-class CommandeForm(forms.ModelForm):
-    class Meta:
-        model = Commande
-        fields = ['acheteur', 'produit', 'quantite', 'status']  # Inclut tous les champs du modèle
+        model = ProductionAgricole
+        fields = ['culture', 'region', 'superficie', 'rendement', 'date_plantation', 'date_recolte', 'commentaires']
         widgets = {
-            'status': forms.Select(choices=[('en_cours', 'En cours'), ('livrée', 'Livrée'), ('annulée', 'Annulée')]),
+            'culture': forms.TextInput(attrs={'class': 'form-control'}),
+            'region': forms.TextInput(attrs={'class': 'form-control'}),
+            'superficie': forms.NumberInput(attrs={'class': 'form-control'}),
+            'rendement': forms.NumberInput(attrs={'class': 'form-control'}),
+            'date_plantation': forms.DateInput(attrs={'type': 'date', 'class': 'form-control'}),
+            'date_recolte': forms.DateInput(attrs={'type': 'date', 'class': 'form-control'}),
+            'commentaires': forms.Textarea(attrs={'rows': 4, 'class': 'form-control'}),
         }
 
-# Formulaire pour le modèle Formation
+
 class FormationForm(forms.ModelForm):
     class Meta:
         model = Formation
-        fields = ['titre', 'description', 'date_debut', 'date_fin', 'formateur']
+        fields = ['titre', 'description', 'video', 'quiz', 'auteur']
+
+
+class ArticleForm(forms.ModelForm):
+    class Meta:
+        model = Article
+        fields = ['nom', 'prix', 'description', 'photo']
         widgets = {
-            'titre': forms.TextInput(attrs={'class': 'form-control mb-3', 'placeholder': 'Titre de la formation'}),
-            'description': forms.Textarea(attrs={'class': 'form-control mb-3', 'rows': 4, 'placeholder': 'Description'}),
-            'date_debut': forms.DateInput(attrs={'class': 'form-control mb-3', 'type': 'date'}),
-            'date_fin': forms.DateInput(attrs={'class': 'form-control mb-3', 'type': 'date'}),
-            'formateur': forms.Select(attrs={'class': 'form-control mb-3'}),
+            'nom': forms.TextInput(attrs={'class': 'form-control'}),
+            'prix': forms.NumberInput(attrs={'class': 'form-control'}),
+            'description': forms.Textarea(attrs={'class': 'form-control', 'rows': 4}),
+            'photo': forms.FileInput(attrs={'class': 'form-control-file'}),
         }
-
-# Formulaire pour le modèle Tutoriel
-class TutorielForm(forms.ModelForm):
-    class Meta:
-        model = Tutoriel
-        fields = ['formation', 'titre', 'contenu', 'fichier_video']
-
-# Formulaire pour le modèle Quiz
-class QuizForm(forms.ModelForm):
-    class Meta:
-        model = Quiz
-        fields = ['formation', 'titre', 'description']
-
-# Formulaire pour le modèle Question
-class QuestionForm(forms.ModelForm):
-    class Meta:
-        model = Question
-        fields = ['quiz', 'texte_question']
-
-# Formulaire pour le modèle Réponse
-class ReponseForm(forms.ModelForm):
-    class Meta:
-        model = Reponse
-        fields = ['question', 'texte_reponse', 'correcte']
-
-# Formulaire pour Inscription à une formation
-class InscriptionFormationForm(forms.ModelForm):
-    class Meta:
-        model = InscriptionFormation
-        fields = ['formation']

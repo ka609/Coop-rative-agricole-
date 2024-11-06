@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>{{ formation.titre }}</h2>
+    <p><strong>Auteur :</strong> {{ formation.auteur }}</p>
+    <p><strong>Date de création :</strong> {{ formation.date_creation }}</p>
+    <p>{{ formation.description }}</p>
+
+    {% if formation.video %}
+        <div class="mt-4">
+            <video width="100%" controls>
+                <source src="{{ formation.video.url }}" type="video/mp4">
+                Votre navigateur ne supporte pas la lecture de vidéos.
+            </video>
+        </div>
+    {% endif %}
+
+    {% if formation.quiz %}
+        <h4 class="mt-4">Quiz</h4>
+        <p>{{ formation.quiz }}</p>
+    {% endif %}
+
+    <!-- Bouton Supprimer sur la page de détail -->
+    <a href="{% url 'Gestions:supp_formation' formation.id %}" class="btn btn-danger btn-sm mt-4" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette formation ?');">Supprimer</a>
+</div>
+{% endblock %}

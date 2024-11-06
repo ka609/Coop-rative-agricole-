@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block title %}Télécharger le Rapport{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>Confirmez le téléchargement du rapport de production</h2>
+    <p>Ce rapport contient toutes les données de production agricole actuelles.</p>
+    <a href="{% url 'Gestions:telecharger_rapport_csv' %}" class="btn btn-primary mt-3">Télécharger le rapport en CSV</a>
+</div>
+{% endblock %}

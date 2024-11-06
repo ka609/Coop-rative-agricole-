@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block title %}E-commerce{% endblock %}
+
+{% load static %}
+{% block content %}
+<div class="container mt-5">
+    <!-- Section de recherche d'article -->
+    <div class="search-bar mb-4">
+        <form method="GET" action="{% url 'Gestions:ecommerce' %}">
+            <input type="text" name="query" class="form-control" placeholder="Rechercher un article..." value="{{ request.GET.query }}">
+        </form>
+    </div>
+
+    <!-- Notifications -->
+    {% if notifications %}
+    <div class="alert alert-info">
+        <ul>
+            {% for notification in notifications %}
+            <li>{{ notification }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+
+    <!-- Section des articles en cartes -->
+    <div class="row">
+        {% for item in articles_commande %}
+        <div class="col-md-4 col-sm-6 mb-4"> <!-- Réduit la taille de la carte -->
+            <div class="card" style="max-width: 250px;"> <!-- Limite la taille de la carte -->
+                {% if item.article.photo %}
+                    <img src="{{ item.article.photo.url }}" class="card-img-top" alt="{{ item.article.nom }}" style="height: 180px; object-fit: cover;">
+                {% else %}
+                    <img src="{% static 'images/default.jpg' %}" class="card-img-top" alt="Image par défaut" style="height: 180px; object-fit: cover;">
+                {% endif %}
+                <div class="card-body">
+                    <h5 class="card-title" style="font-size: 1.2rem;">{{ item.article.nom }}</h5> <!-- Ajuste la taille du texte -->
+                    <p class="card-text" style="font-size: 0.9rem;">{{ item.article.description|truncatewords:15 }}</p> <!-- Réduit la taille du texte -->
+                    <p class="card-text"><strong>{{ item.article.prix }} FCFA</strong></p>
+                    <!-- Boutons selon les conditions -->
+                    {% if item.peut_etre_commande %}
+                        <a href="{% url 'Gestions:acheter_article' item.article.id %}" class="btn btn-primary btn-sm">Commander</a> <!-- Bouton plus petit -->
+                    {% else %}
+                        <button class="btn btn-secondary btn-sm" disabled>Votre Article</button>
+                    {% endif %}
+                    <a href="{% url 'Gestions:detail_article' item.article.id %}" class="btn btn-outline-info btn-sm">Détails</a> <!-- Bouton plus petit -->
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- Pagination -->
+    <div class="pagination justify-content-center">
+        {% if articles.has_previous %}
+        <a href="?page={{ articles.previous_page_number }}{% if query %}&query={{ query }}{% endif %}" class="btn btn-outline-secondary mr-2">Précédent</a>
+        {% endif %}
+        {% if articles.has_next %}
+        <a href="?page={{ articles.next_page_number }}{% if query %}&query={{ query }}{% endif %}" class="btn btn-outline-secondary">Suivant</a>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

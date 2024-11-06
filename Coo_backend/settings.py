@@ -12,6 +12,7 @@ SECRET_KEY = config('SECRET_KEY', default='your-default-secret-key')
 # Mode Debug
 DEBUG = config('DEBUG', default=False, cast=bool)
 
+
 # Hôtes autorisés
 ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='').split(',')
 
@@ -103,25 +104,24 @@ DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 #les cookies
 SESSION_ENGINE = 'django.contrib.sessions.backends.signed_cookies'
 SESSION_COOKIE_AGE = 3600  # 1 heure en secondes
-SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+SESSION_EXPIRE_AT_BROWSER_CLOSE = False
 
 #les caches
-CACHES = {
-    'default': {
-        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
-        'LOCATION': 'unique-snowflake',
-    }
-}
+#CACHES = {
+    #'default': {
+       # 'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+       # 'LOCATION': 'unique-snowflake',
+  #  }
+#}
 
-SECURE_SSL_REDIRECT = True
-SESSION_COOKIE_SECURE = True
-CSRF_COOKIE_SECURE = True
+#SECURE_SSL_REDIRECT = False
+#SESSION_COOKIE_SECURE = False
+#CSRF_COOKIE_SECURE = False
 
 
 # l'API paydounia
-PAYDOUNIA_TEST_PUBLIC_KEY = config('PAYDOUNIA_TEST_PUBLIC_KEY')
-
-PAYDOUNIA_MASTER_KEY = config('PAYDOUNIA_MASTER_KEY')
-PAYDOUNIA_PRIVATE_KEY = config('PAYDOUNIA_PRIVATE_KEY')
-PAYDOUNIA_TOKEN = config('PAYDOUNIA_TOKEN')
+PAYDUNYA_MASTER_KEY = config("PAYDUNYA_MASTER_KEY")
+PAYDUNYA_PRIVATE_KEY = config("PAYDUNYA_PRIVATE_KEY")
+PAYDUNYA_PUBLIC_KEY = config("PAYDUNYA_PUBLIC_KEY")
+PAYDUNYA_TOKEN = config("PAYDUNYA_TOKEN")
 

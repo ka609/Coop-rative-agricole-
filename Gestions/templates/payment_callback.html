@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6 text-center">
+            <h2 class="mb-4">Statut du Paiement</h2>
+
+            <!-- Affiche le statut du paiement -->
+            {% if status == "success" %}
+                <div class="alert alert-success" role="alert">
+                    <p>Le paiement a été effectué avec succès ! Merci pour votre achat.</p>
+                </div>
+            {% elif status == "failure" %}
+                <div class="alert alert-danger" role="alert">
+                    <p>Le paiement a échoué. Veuillez réessayer.</p>
+                </div>
+            {% else %}
+                <div class="alert alert-info" role="alert">
+                    <p>Statut de paiement en attente. Veuillez vérifier ultérieurement.</p>
+                </div>
+            {% endif %}
+
+            <!-- Lien pour revenir à la page d'accueil -->
+            <a href="{% url 'Gestions:dashbord' %}" class="btn btn-secondary mt-3">Retour à l'accueil</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

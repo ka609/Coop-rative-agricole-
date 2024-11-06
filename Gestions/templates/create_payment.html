@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h2>Procéder au Paiement</h2>
+    {% if payment_url %}
+        <p>Cliquez sur le bouton ci-dessous pour finaliser votre paiement :</p>
+        <a href="{{ payment_url }}" class="btn btn-primary" target="_blank">Payer maintenant</a>
+    {% else %}
+        <p>Une erreur est survenue lors de la génération de la facture.</p>
+    {% endif %}
+{% endblock %}

@@ -1,17 +1,39 @@
 {% extends 'base.html' %}
-
 {% load static %}
+
 {% block content %}
 <div class="container">
     <h2>Déconnexion réussie</h2>
-    {% if messages %}
-        <div class="alert alert-info" role="alert">
+
+    <!-- Conteneur pour les messages d'alerte -->
+    <div id="alert-container">
+        {% if messages %}
             {% for message in messages %}
-                <p>{{ message }}</p>
+                <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                    <p>{{ message }}</p>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
             {% endfor %}
-        </div>
-    {% endif %}
+        {% endif %}
+    </div>
+
     <p>Vous avez été déconnecté avec succès.</p>
     <p><a href="{% url 'accounts:login' %}" class="btn btn-primary">Se reconnecter</a></p>
 </div>
+
+<!-- JavaScript pour faire disparaître les alertes après un délai -->
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        setTimeout(function() {
+            const alerts = document.querySelectorAll('#alert-container .alert');
+            alerts.forEach(alert => {
+                alert.classList.remove('show');
+                alert.classList.add('fade');
+                setTimeout(() => alert.remove(), 300); // Supprime le nœud de l'alerte après l'animation
+            });
+        }, 5000); // Disparaît après 5 secondes
+    });
+</script>
 {% endblock %}

@@ -1,18 +1,23 @@
 {% extends 'base.html' %}
-
 {% load static %}
+
 {% block content %}
 <div class="container">
     <h2>Inscription</h2>
 
-    <!-- Section pour afficher les messages de confirmation ou d'alerte -->
-    {% if messages %}
-    <div class="mb-3">
-        {% for message in messages %}
-        <div class="alert alert-{{ message.tags }}">{{ message }}</div>
-        {% endfor %}
+    <!-- Conteneur pour les messages d'alerte -->
+    <div id="alert-container">
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            {% endfor %}
+        {% endif %}
     </div>
-    {% endif %}
 
     <form method="post" class="form-group">
         {% csrf_token %}
@@ -45,4 +50,19 @@
     </form>
     <p>Déjà un compte ? <a href="{% url 'accounts:login' %}">Connectez-vous</a></p>
 </div>
+
+<!-- JavaScript pour gérer la disparition automatique des alertes -->
+<script>
+    // Supprime automatiquement les alertes après un certain délai
+    document.addEventListener("DOMContentLoaded", function() {
+        setTimeout(function() {
+            const alerts = document.querySelectorAll('#alert-container .alert');
+            alerts.forEach(alert => {
+                alert.classList.remove('show');
+                alert.classList.add('fade');
+                setTimeout(() => alert.remove(), 300); // Supprime le nœud de l'alerte
+            });
+        }, 5000); // Disparaît après 5 secondes
+    });
+</script>
 {% endblock %}

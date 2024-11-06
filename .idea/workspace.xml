@@ -5,9 +5,67 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bd2bf241-c1f0-4f59-b067-7e3010c38741" name="Changes" comment="changement">
+      <change afterPath="$PROJECT_DIR$/Gestions/templates/acheter_article.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Gestions/templates/create_payment.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Gestions/templates/creer_facture.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Gestions/templates/creer_formation.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Gestions/templates/creer_production.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Gestions/templates/detail_article.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Gestions/templates/detail_formation.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Gestions/templates/detail_production.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Gestions/templates/ecommerce.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Gestions/templates/liste_articles.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Gestions/templates/liste_formations.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Gestions/templates/liste_productions.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Gestions/templates/liste_produits.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Gestions/templates/payment_callback.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Gestions/templates/publier_article.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Gestions/templates/suivi_agricole.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Gestions/templates/telecharger_rapport.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/Coo_backend.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Coo_backend.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Coo_backend/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/Coo_backend/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Coo_backend/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/Coo_backend/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gestions/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/Gestions/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gestions/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/Gestions/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gestions/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/Gestions/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gestions/paydounia.py" beforeDir="false" afterPath="$PROJECT_DIR$/Gestions/paydounia.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gestions/templates/commande_create.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gestions/templates/commande_delete.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gestions/templates/commande_list.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gestions/templates/commande_update.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gestions/templates/dashboard.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gestions/templates/devenir_membre.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gestions/templates/formation_create.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gestions/templates/formation_list.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gestions/templates/inscription.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gestions/templates/membre_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/Gestions/templates/membre_list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gestions/templates/production_create.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gestions/templates/production_delete.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gestions/templates/production_detail.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gestions/templates/production_list.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gestions/templates/production_update.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gestions/templates/produit_create.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gestions/templates/produit_delete.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gestions/templates/produit_detail.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gestions/templates/produit_list.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gestions/templates/produit_update.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gestions/templates/support.html" beforeDir="false" afterPath="$PROJECT_DIR$/Gestions/templates/support.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gestions/templates/tutoriel_create.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gestions/templates/tutoriel_delete.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gestions/templates/tutoriel_detail.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gestions/templates/tutoriel_list.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gestions/templates/tutoriel_update.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gestions/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/Gestions/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gestions/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Gestions/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/accounts/templates/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/accounts/templates/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/accounts/templates/logout.html" beforeDir="false" afterPath="$PROJECT_DIR$/accounts/templates/logout.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/accounts/templates/register.html" beforeDir="false" afterPath="$PROJECT_DIR$/accounts/templates/register.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/Dashboard.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/Dashboard.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,22 +113,22 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
-    &quot;RunOnceActivity.OpenDjangoStructureViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Kassongo Moussa/PycharmProjects/Coop-rative-agricole-&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "DefaultHtmlFileTemplate": "HTML File",
+    "RunOnceActivity.OpenDjangoStructureViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "C:/Users/Kassongo Moussa/PycharmProjects/Coop-rative-agricole-",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "terminal",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Kassongo Moussa\PycharmProjects\Coop-rative-agricole-\Gestions\templates" />
@@ -183,5 +241,16 @@
     <MESSAGE value="modifié" />
     <MESSAGE value="changement" />
     <option name="LAST_COMMIT_MESSAGE" value="changement" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/Gestions/views.py</url>
+          <line>6</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

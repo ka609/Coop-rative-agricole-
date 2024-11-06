@@ -1,10 +1,10 @@
 # Ignorer les environnements virtuels
 env/
-
 # Ignorer les fichiers spécifiques à PyCharm
 .idea/
-
 
 static/css/*.css
 
 static/js/*.js
+
+#DATABASE_URL=postgres://postgres:projet2024@localhost:5432/postgres
