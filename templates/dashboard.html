@@ -14,11 +14,18 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
-                <li class="nav-item"><a href="{% url 'Gestions:membre_list' %}" class="nav-link">Membres</a></li>
-                <li class="nav-item"><a href="{% url 'Gestions:ecommerce' %}" class="nav-link">E-commerce</a></li>
-                <!-- Ajout des liens vers les vues de productions et formations -->
-                <li class="nav-item"><a href="{% url 'Gestions:suivi_agricole' %}" class="nav-link">Suivi Agricole</a></li>
-                <li class="nav-item"><a href="{% url 'Gestions:liste_formations' %}" class="nav-link">Formations</a></li>
+                <li class="nav-item">
+                    <a href="{% url 'Gestions:membre_list' %}" class="nav-link text-white">Membres</a>
+                </li>
+                <li class="nav-item">
+                    <a href="{% url 'Gestions:ecommerce' %}" class="nav-link text-white">E-commerce</a>
+                </li>
+                <li class="nav-item">
+                    <a href="{% url 'Gestions:suivi_agricole' %}" class="nav-link text-white">Suivi Agricole</a>
+                </li>
+                <li class="nav-item">
+                    <a href="{% url 'Gestions:liste_formations' %}" class="nav-link text-white">Formations</a>
+                </li>
             </ul>
         </div>
     </div>
