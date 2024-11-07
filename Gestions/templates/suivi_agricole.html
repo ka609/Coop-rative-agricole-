@@ -6,47 +6,15 @@
 {% block content %}
 <div class="container my-5">
 
-    <!-- Titre de la page -->
+    <!-- Page Title -->
     <h1 class="text-center my-4 text-primary font-weight-bold">Suivi des Productions Agricoles au Burkina Faso</h1>
 
-    <!-- Formulaire de création de production agricole -->
-    <h2 class="my-4 text-secondary">Créer une Nouvelle Production Agricole</h2>
-    <form method="POST" action="{% url 'Gestions:creer_production' %}">
-        {% csrf_token %}
-        <div class="row">
-            <div class="col-md-6 mb-3">
-                {{ form.culture.label_tag }}
-                {{ form.culture }}
-            </div>
-            <div class="col-md-6 mb-3">
-                {{ form.region.label_tag }}
-                {{ form.region }}
-            </div>
-            <div class="col-md-6 mb-3">
-                {{ form.superficie.label_tag }}
-                {{ form.superficie }}
-            </div>
-            <div class="col-md-6 mb-3">
-                {{ form.rendement.label_tag }}
-                {{ form.rendement }}
-            </div>
-            <div class="col-md-6 mb-3">
-                {{ form.date_plantation.label_tag }}
-                {{ form.date_plantation }}
-            </div>
-            <div class="col-md-6 mb-3">
-                {{ form.date_recolte.label_tag }}
-                {{ form.date_recolte }}
-            </div>
-            <div class="col-12 mb-3">
-                {{ form.commentaires.label_tag }}
-                {{ form.commentaires }}
-            </div>
-        </div>
-        <button type="submit" class="btn btn-primary">Enregistrer la Production</button>
-    </form>
+    <!-- Button to the Production Creation Form -->
+    <div class="text-center my-3">
+        <a href="{% url 'Gestions:creer_production' %}" class="btn btn-primary btn-lg">Créer une Nouvelle Production Agricole</a>
+    </div>
 
-    <!-- Tableau de suivi des productions -->
+    <!-- Production Tracking Table -->
     <h2 class="my-4 text-secondary">Tableau de Suivi des Productions</h2>
     {% if productions %}
     <table class="table table-bordered table-hover table-striped">
@@ -77,44 +45,12 @@
     <p class="text-center text-muted">Aucune production enregistrée pour le moment.</p>
     {% endif %}
 
-    <!-- Carte interactive du Burkina Faso -->
+    <!-- Interactive Map of Burkina Faso -->
     <h2 class="my-4 text-secondary">Carte des Productions</h2>
     <div id="map" style="height: 400px;" class="border rounded my-3"></div>
 
-    <!-- Graphiques et statistiques -->
-    <h2 class="my-4 text-secondary">Statistiques des Productions</h2>
-    <div class="row">
-        <div class="col-md-6">
-            <div class="card mb-4 shadow-sm">
-                <div class="card-body">
-                    <h5 class="card-title">Rendement par Culture</h5>
-                    <canvas id="chartRendement" style="height: 300px;"></canvas>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="card mb-4 shadow-sm">
-                <div class="card-body">
-                    <h5 class="card-title">Superficie par Culture</h5>
-                    <canvas id="chartSuperficie" style="height: 300px;"></canvas>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Section de commentaires -->
+    <!-- List of Comments -->
     <h2 class="my-4 text-secondary">Commentaires</h2>
-    <form method="POST" action="{% url 'Gestions:ajouter_commentaire' %}">
-        {% csrf_token %}
-        <input type="hidden" name="production_id" value="{{ production.id }}">
-        <div class="form-group">
-            <label for="commentaire">Laissez un commentaire :</label>
-            <textarea class="form-control" id="commentaire" name="commentaire" rows="3" required></textarea>
-        </div>
-        <button type="submit" class="btn btn-primary">Soumettre</button>
-    </form>
-
-    <!-- Liste des commentaires -->
     <ul class="list-group my-4">
         {% for commentaire in commentaires %}
         <li class="list-group-item">{{ commentaire }}</li>
@@ -123,7 +59,7 @@
         {% endfor %}
     </ul>
 
-    <!-- Bouton suivre une formation -->
+    <!-- Button for Agricultural Training -->
     <div class="text-center my-3">
         <a href="{% url 'Gestions:liste_formations' %}" class="btn btn-success btn-lg">Suivre une formation agricole</a>
     </div>
@@ -132,10 +68,10 @@
 {% endblock %}
 
 {% block extra_js %}
-<!-- Leaflet.js pour la carte interactive -->
+<!-- Leaflet.js for the interactive map -->
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 <script>
-    var map = L.map('map').setView([12.2383, -1.5616], 6);  // Centré sur le Burkina Faso
+    var map = L.map('map').setView([12.2383, -1.5616], 6);  // Centered on Burkina Faso
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 18,
         attribution: '© OpenStreetMap contributors'
@@ -145,53 +81,5 @@
     L.marker([{{ production.latitude }}, {{ production.longitude }}]).addTo(map)
         .bindPopup('<b>{{ production.culture }}</b><br>{{ production.region }}');
     {% endfor %}
-</script>
-
-<!-- Chart.js pour les graphiques -->
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script>
-    var ctxRendement = document.getElementById('chartRendement').getContext('2d');
-    var chartRendement = new Chart(ctxRendement, {
-        type: 'bar',
-        data: {
-            labels: [{% for production in productions %}'{{ production.culture }}', {% endfor %}],
-            datasets: [{
-                label: 'Rendement (tonnes/ha)',
-                data: [{% for production in productions %}{{ production.rendement }}, {% endfor %}],
-                backgroundColor: 'rgba(75, 192, 192, 0.6)',
-                borderColor: 'rgba(75, 192, 192, 1)',
-                borderWidth: 1
-            }]
-        },
-        options: {
-            responsive: true,
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
-            }
-        }
-    });
-
-    var ctxSuperficie = document.getElementById('chartSuperficie').getContext('2d');
-    var chartSuperficie = new Chart(ctxSuperficie, {
-        type: 'pie',
-        data: {
-            labels: [{% for production in productions %}'{{ production.culture }}', {% endfor %}],
-            datasets: [{
-                data: [{% for production in productions %}{{ production.superficie }}, {% endfor %}],
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.6)',
-                    'rgba(54, 162, 235, 0.6)',
-                    'rgba(255, 206, 86, 0.6)',
-                    'rgba(75, 192, 192, 0.6)',
-                    'rgba(153, 102, 255, 0.6)'
-                ]
-            }]
-        },
-        options: {
-            responsive: true
-        }
-    });
 </script>
 {% endblock %}

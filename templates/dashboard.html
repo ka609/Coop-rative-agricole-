@@ -24,7 +24,7 @@
     </div>
 </nav>
 
-<!-- Widgets centraux -->
+<!-- Contenu principal -->
 <div class="container">
     <div class="row text-center mb-5">
         <!-- Total des membres inscrits -->
@@ -32,7 +32,7 @@
             <div class="card shadow p-4 rounded bg-light text-center">
                 <i class="fas fa-users fa-3x mb-3 text-primary"></i>
                 <h5>Membres inscrits</h5>
-                <p>{{ total_members }} membres</p>  <!-- Utilise total_members pour l'affichage -->
+                <p>{{ total_members }} membres</p>
             </div>
         </div>
 
@@ -41,7 +41,7 @@
             <div class="card shadow p-4 rounded bg-light text-center">
                 <i class="fas fa-boxes fa-3x mb-3 text-success"></i>
                 <h5>Articles disponibles</h5>
-                <p>{{ articles|length }} articles</p> <!-- Affiche le nombre total d'articles -->
+                <p>{{ articles|length }} articles</p>
             </div>
         </div>
 
@@ -50,7 +50,7 @@
             <div class="card shadow p-4 rounded bg-light text-center">
                 <i class="fas fa-chalkboard-teacher fa-3x mb-3 text-warning"></i>
                 <h5>Formations disponibles</h5>
-                <p>{{ total_formations }} formations</p> <!-- Utilise total_formations pour l'affichage -->
+                <p>{{ total_formations }} formations</p>
             </div>
         </div>
     </div>
@@ -65,7 +65,7 @@
                 <p>Nom d'utilisateur : {{ user.username }}</p>
             </div>
         </div>
-    </div> <!-- Fin de la section Informations Personnelles -->
+    </div>
 
     <!-- Articles Publiés -->
     <div class="row mb-5">

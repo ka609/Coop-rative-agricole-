@@ -21,6 +21,14 @@
             {% endif %}
 
             <a href="{% url 'Gestions:ecommerce' %}" class="btn btn-outline-secondary mt-3">Retour à la boutique</a>
+
+            <!-- Afficher le bouton de suppression si l'utilisateur est l'auteur de l'article -->
+            {% if request.user == article.vendeur %}
+                <form method="POST" action="{% url 'Gestions:supprimer_article' article.id %}" class="mt-3">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger">Supprimer cet article</button>
+                </form>
+            {% endif %}
         </div>
     </div>
 </div>

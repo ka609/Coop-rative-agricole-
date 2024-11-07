@@ -471,6 +471,20 @@ def suivi_agricole(request):
     }
     return render(request, 'suivi_agricole.html', context)
 
+@login_required
+def supprimer_article(request, article_id):
+    article = get_object_or_404(Article, id=article_id)
+
+    # Vérifie si l'utilisateur actuel est l'auteur de l'article
+    if request.user == article.vendeur:
+        article.delete()
+        messages.success(request, "L'article a été supprimé avec succès.")
+    else:
+        messages.error(request, "Vous n'êtes pas autorisé à supprimer cet article.")
+
+    # Redirige vers la page de la boutique ou la liste des articles
+    return redirect('Gestions:ecommerce')
+
 
 def detail_production(request, production_id):
     production = get_object_or_404(ProductionAgricole, id=production_id)
