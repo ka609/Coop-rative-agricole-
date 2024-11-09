@@ -119,6 +119,7 @@ def dashboard(request):
     total_users = User.objects.count()  # Compte tous les utilisateurs
     total_members = Membre.objects.count()  # Compte seulement les membres enregistrés
     total_formations = Formation.objects.count()  # Compte le nombre de formations
+    formations = Formation.objects.all()
 
     context = {
         'articles': articles,
@@ -126,6 +127,7 @@ def dashboard(request):
         'total_users': total_users,  # Nombre total d'utilisateurs
         'total_members': total_members,  # Nombre total de membres
         'total_formations': total_formations,  # Nombre total de formations
+        'formations': formations,
     }
 
     return render(request, 'dashboard.html', context)
