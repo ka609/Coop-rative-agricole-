@@ -33,14 +33,14 @@ class MembreCreateView(CreateView):
     model = Membre
     form_class = MembreForm
     template_name = 'membre_create.html'
-    success_url = reverse_lazy('membre_list')
+    success_url = reverse_lazy('Gestions:membre_list')
 
 
 class MembreUpdateView(UpdateView):
     model = Membre
     form_class = MembreForm
     template_name = 'membre_update.html'
-    success_url = reverse_lazy('membre_list')
+    success_url = reverse_lazy('Gestions:membre_list')
 
 
 class MembreDetailView(DetailView):
@@ -51,7 +51,7 @@ class MembreDetailView(DetailView):
 class MembreDeleteView(DeleteView):
     model = Membre
     template_name = 'membre_delete.html'
-    success_url = reverse_lazy('membre_list')
+    success_url = reverse_lazy('Gestions:membre_list')
 
 def suivi_agricole(request):
     productions = ProductionAgricole.objects.all()
