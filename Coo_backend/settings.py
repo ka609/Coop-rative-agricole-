@@ -27,7 +27,7 @@ INSTALLED_APPS = [
     'Gestions.apps.GestionsConfig',
     'accounts.apps.AccountsConfig',
     'crispy_forms',
-    'crispy_bootstrap4'
+    'crispy_bootstrap4',
      'cloudinary',  # Ajout de Cloudinary
     'cloudinary_storage',
 ]
