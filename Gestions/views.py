@@ -404,7 +404,7 @@ def acheter_article(request, article_id):
     # Récupérer l'article et vérifier si l'utilisateur peut le commander
     article = get_object_or_404(Article, id=article_id)
     if not article.peut_etre_commande_par(request.user):
-        return redirect('ecommerce')  # Rediriger si l'utilisateur ne peut pas commander cet article
+        return redirect('Gestions:ecommerce')  # Rediriger si l'utilisateur ne peut pas commander cet article
 
     # Créer une transaction (à adapter selon vos besoins)
     Transaction.objects.create(
@@ -414,7 +414,7 @@ def acheter_article(request, article_id):
         statut="en attente"
     )
     # Rediriger ou afficher un message de confirmation
-    return redirect('ecommerce')
+    return redirect('Gestions:ecommerce')
 
 
 def detail_article(request, article_id):
@@ -460,7 +460,7 @@ def suivi_agricole(request):
         form = ProductionAgricoleForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('suivi_agricole')
+            return redirect('Gestions:suivi_agricole')
     else:
         form = ProductionAgricoleForm()
 

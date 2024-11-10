@@ -75,32 +75,34 @@
     </div>
 
     <!-- Articles Publiés -->
-    <div class="row mb-5">
-        <div class="col-md-12">
-            <h5>Articles Publiés</h5>
-            <a href="{% url 'Gestions:publier_article' %}" class="btn btn-success">Publier un Article</a>
-            <div class="card shadow p-4 rounded bg-light">
-                <ul class="list-unstyled">
-                    {% for article in articles %}
-                        <li class="mb-3">
-                            <h6>{{ article.nom }}</h6>
-                            <p>{{ article.description }}</p>
-                            <p>Prix : {{ article.prix }} FCFA</p>
-                            {% if article.photo %}
-                                <img src="{{ article.photo.url }}" alt="Photo de {{ article.nom }}" class="img-thumbnail mb-2" style="max-width: 150px;">
-                            {% endif %}
-                            <br>
+<div class="row mb-5">
+    <div class="col-md-12">
+        <h5>Articles Publiés</h5>
+        <a href="{% url 'Gestions:publier_article' %}" class="btn btn-success mb-3">Publier un Article</a>
+        <div class="row">
+            {% for article in articles %}
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="card shadow p-3 h-100">
+                        {% if article.photo %}
+                            <img src="{{ article.photo.url }}" alt="Photo de {{ article.nom }}" class="card-img-top" style="max-height: 200px; object-fit: cover;">
+                        {% endif %}
+                        <div class="card-body">
+                            <h6 class="card-title">{{ article.nom }}</h6>
+                            <p class="card-text">{{ article.description }}</p>
+                            <p class="card-text"><strong>Prix :</strong> {{ article.prix }} FCFA</p>
                             <small class="text-muted">Publié il y a {{ article.date_publication|timesince }}.</small>
-                            <br>
-                            <a href="{% url 'Gestions:creer_facture' article.id %}" class="btn btn-primary mt-2">Payer</a>
-                        </li>
-                    {% empty %}
-                        <p>Aucun article publié.</p>
-                    {% endfor %}
-                </ul>
-            </div>
+                        </div>
+                        <div class="card-footer text-center">
+                            <a href="{% url 'Gestions:creer_facture' article.id %}" class="btn btn-primary">Payer</a>
+                        </div>
+                    </div>
+                </div>
+            {% empty %}
+                <p>Aucun article publié.</p>
+            {% endfor %}
         </div>
     </div>
+</div>
 
     <!-- Formations Disponibles -->
     <div class="row mb-5">
