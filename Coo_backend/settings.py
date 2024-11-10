@@ -28,6 +28,8 @@ INSTALLED_APPS = [
     'accounts.apps.AccountsConfig',
     'crispy_forms',
     'crispy_bootstrap4'
+     'cloudinary',  # Ajout de Cloudinary
+    'cloudinary_storage',
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
@@ -90,17 +92,34 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
+#STORAGES = {
+    #"default": {
+        #"BACKEND": "django.core.files.storage.FileSystemStorage",
+        #"OPTIONS": {
+         #   "location": BASE_DIR / "media",
+       # },
+   # },
+    #"staticfiles": {
+        #"BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+   # },
+#}
+
+# Configuration de Whitenoise pour les fichiers statiques
 STORAGES = {
-    "default": {
-        "BACKEND": "django.core.files.storage.FileSystemStorage",
-        "OPTIONS": {
-            "location": BASE_DIR / "media",
-        },
-    },
     "staticfiles": {
         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
     },
 }
+
+
+# Paramètres Cloudinary
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': config('CLOUDINARY_CLOUD_NAME'),
+    'API_KEY': config('CLOUDINARY_API_KEY'),
+    'API_SECRET': config('CLOUDINARY_API_SECRET'),
+}
+
 
 # Clé primaire par défaut
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
