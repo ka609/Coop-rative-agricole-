@@ -1,41 +1,21 @@
+<!-- templates/creer_facture.html -->
 {% extends 'base.html' %}
 
-{% block title %}Création de Facture{% endblock %}
+{% block title %}Achat de Produit{% endblock %}
 
 {% block content %}
-    <h1 class="text-center">Facture</h1>
+<div class="card">
+    <div class="card-header">
+        <h2>Acheter {{ article.nom }}</h2>
+    </div>
+    <div class="card-body">
+        <p><strong>Prix :</strong> {{ article.prix }} XOF</p>
+        <p><strong>Description :</strong> {{ article.description }}</p>
 
-    {% if messages %}
-        <div class="alert alert-info" role="alert">
-            {% for message in messages %}
-                {{ message }}
-            {% endfor %}
-        </div>
-    {% endif %}
-
-    <hr>
-    <h2>Détails de l'article</h2>
-    <table class="table">
-        <thead>
-            <tr>
-                <th scope="col">Nom</th>
-                <th scope="col">Description</th>
-                <th scope="col">Quantité</th>
-                <th scope="col">Prix Unitaire</th>
-                <th scope="col">Prix Total</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>{{ article.nom }}</td>
-                <td>{{ article.description }}</td>
-                <td>1</td>
-                <td>{{ article.prix }} FCFA</td>
-                <td>{{ article.prix }} FCFA</td>
-            </tr>
-        </tbody>
-    </table>
-    <hr>
-    <h3>Total à Payer : {{ article.prix }} FCFA</h3>
-    <a href="{{ payment_url }}" class="btn btn-primary">Payer</a>
+        <form method="post" action="{% url 'creer_facture' article.id %}">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-primary btn-lg btn-block">Payer avec Cinetpay</button>
+        </form>
+    </div>
+</div>
 {% endblock %}

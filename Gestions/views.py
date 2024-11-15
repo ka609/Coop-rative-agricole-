@@ -13,15 +13,104 @@ from django.conf import settings
 import hmac
 import hashlib
 from django.db.models import Q
-from dotenv import load_dotenv
 from django.contrib import messages
 import json
 from django.views.decorators.csrf import csrf_exempt
-import paydunya
 from django.core.paginator import Paginator
-from paydunya import InvoiceItem
 import base64
 import matplotlib.pyplot as plt
+from cinetpay_sdk.s_d_k import Cinetpay
+import uuid
+from decouple import config
+from django.db import IntegrityError
+
+
+CINETPAY_API_KEY = config("CINETPAY_API_KEY")
+CINETPAY_SITE_ID = config("CINETPAY_SITE_ID")
+
+@login_required
+def creer_facture(request, article_id):
+    # Récupère les informations de l'article
+    article = get_object_or_404(Article, id=article_id)
+
+    # Initialise le client Cinetpay avec l'API Key et le Site ID
+    client = Cinetpay(CINETPAY_API_KEY, CINETPAY_SITE_ID)
+    transaction_id = f"{request.user.id}-{article_id}-{uuid.uuid4()}"
+
+    # Vérifier si le transaction_id existe déjà
+    while Transaction.objects.filter(transaction_id=transaction_id).exists():
+        # Si le transaction_id existe, générer un nouveau
+        transaction_id = f"{request.user.id}-{article_id}-{uuid.uuid4()}"
+
+    data = {
+        'amount': article.prix,
+        'currency': "XOF",
+        'transaction_id': transaction_id,
+        'description': f"Achat de {article.nom}",
+        'return_url': "http://localhost:8000/confirmation/",
+        'notify_url': "http://localhost:8000/cinetpay/notification/",
+        'customer_name': request.user.first_name,
+        'customer_surname': request.user.last_name,
+    }
+
+    # Initialisation du paiement avec Cinetpay
+    response = client.PaymentInitialization(data)
+
+    if response.get('code') in ['00', '201']:  # Ajout de '201' comme code valide
+        payment_url = response['data']['payment_url']
+        try:
+            Transaction.objects.create(
+                acheteur=request.user,
+                article=article,
+                montant=article.prix,
+                statut="en attente",
+                transaction_id=transaction_id
+            )
+        except IntegrityError:
+            # Gérer l'erreur si une transaction avec ce même transaction_id existe toujours
+            return HttpResponse("Erreur de création de transaction. Tentative de transaction dupliquée.")
+        return redirect(payment_url)  # Redirection vers l'URL de paiement
+    else:
+        # Affichage des informations d'erreur
+        print("Erreur Cinetpay:", response)
+        return HttpResponse(
+            f"Erreur lors de la création du paiement: {response.get('message', 'Détails indisponibles')}")
+
+
+@csrf_exempt
+def cinetpay_webhook(request):
+    if request.method != "POST":
+        return JsonResponse({"message": "Méthode non autorisée"}, status=405)
+
+    try:
+        data = json.loads(request.body)
+    except json.JSONDecodeError:
+        return JsonResponse({"message": "Erreur de format JSON"}, status=400)
+
+    signature = request.headers.get("Cinetpay-Signature")
+
+    if not verify_signature(request.body, signature):
+        return JsonResponse({"message": "Signature non valide"}, status=403)
+
+    if data.get("status") == "completed":
+        transaction_id = data.get("transaction_id")
+        transaction = Transaction.objects.filter(transaction_id=transaction_id).first()
+
+        if transaction:
+            transaction.statut = "payé"
+            transaction.save()
+            return JsonResponse({"message": "Paiement reçu et enregistré"}, status=200)
+        else:
+            return JsonResponse({"message": "Transaction non trouvée"}, status=404)
+
+    return JsonResponse({"message": "Paiement non complété"}, status=400)
+
+def verify_signature(payload, received_signature, secret):
+    computed_signature = hmac.new(
+        secret.encode(), payload, hashlib.sha256
+    ).hexdigest()
+    return hmac.compare_digest(computed_signature, received_signature)
+
 
 # Vues pour les Membres
 class MembreListView(ListView):
@@ -252,97 +341,6 @@ def create_discussion(request):
 def liste_articles(request):
     articles = Article.objects.all()  # Utilisez un 'a' minuscule pour 'articles'
     return render(request, 'liste_articles.html', {'articles': articles})  # Utilisez 'articles' ici
-
-
-# Charge les variables d'environnement
-load_dotenv()
-
-paydunya.api_keys = {
-    'PAYDUNYA-MASTER-KEY': os.getenv("PAYDUNYA_MASTER_KEY"),
-    'PAYDUNYA-PRIVATE-KEY': os.getenv("PAYDUNYA_PRIVATE_KEY"),
-    'PAYDUNYA-TOKEN': os.getenv("PAYDUNYA_TOKEN")
-}
-paydunya.debug = True
-
-def creer_facture(request, article_id):
-    # Récupérez les informations de l'article
-    article = get_object_or_404(Article, id=article_id)
-    store = paydunya.Store(name="Vente des Agricole")
-
-    # Créer une facture PayDunya
-    invoice = paydunya.Invoice(store)
-
-    # Créer un article de facture
-    item = InvoiceItem(
-        name=article.nom,
-        quantity=1,
-        unit_price=str(article.prix),
-        total_price=str(article.prix),  # Vérifiez que le total correspond bien à la quantité * prix unitaire
-        description=article.description
-    )
-
-    # Ajouter l'article à la facture
-    invoice.add_items([item])  # Passer une liste avec l'article
-
-    # Créez la facture et redirigez l'utilisateur vers le lien de paiement
-    successful, response = invoice.create()
-    if successful:
-        payment_url = response.get('response_text')
-
-        # Créer un enregistrement de transaction
-        Transaction.objects.create(
-            acheteur=request.user,
-            article=article,
-            montant=article.prix,
-            statut="en attente"
-        )
-
-        return redirect(payment_url)
-
-    return HttpResponse("Erreur lors de la création du paiement")
-
-
-@csrf_exempt
-def paydunya_webhook(request):
-    if request.method != "POST":
-        return JsonResponse({"message": "Méthode non autorisée"}, status=405)
-
-    try:
-        # Décoder les données JSON envoyées
-        data = json.loads(request.body)
-    except json.JSONDecodeError:
-        return JsonResponse({"message": "Erreur de format JSON"}, status=400)
-
-    # Vérification de la signature pour l'authenticité du webhook
-    signature = request.headers.get("Paydunya-Signature")
-    secret = settings.PAYDUNYA_WEBHOOK_SECRET  # Assurez-vous d'ajouter cette clé dans settings.py
-
-    if not verify_signature(request.body, signature, secret):
-        return JsonResponse({"message": "Signature non valide"}, status=403)
-
-    # Vérifier si le statut du paiement est "completed"
-    if data.get("status") == "completed":
-        article_id = data.get("custom_data", {}).get("article_id")
-        article = get_object_or_404(Article, id=article_id)
-
-        # Mise à jour de la transaction associée
-        transaction = Transaction.objects.filter(article=article, acheteur=request.user).first()
-        if transaction:
-            transaction.statut = "payé"
-            transaction.save()
-            return JsonResponse({"message": "Paiement reçu et enregistré"}, status=200)
-        else:
-            return JsonResponse({"message": "Transaction non trouvée"}, status=404)
-
-    return JsonResponse({"message": "Paiement non complété"}, status=400)
-
-
-def verify_signature(payload, received_signature, secret):
-    """Vérifie la signature du webhook pour confirmer l'authenticité."""
-    computed_signature = hmac.new(
-        secret.encode(), payload, hashlib.sha256
-    ).hexdigest()
-    return hmac.compare_digest(computed_signature, received_signature)
 
 
 @login_required

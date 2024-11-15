@@ -29,7 +29,7 @@ INSTALLED_APPS = [
     'accounts.apps.AccountsConfig',
     'crispy_forms',
     'crispy_bootstrap4',
-     'cloudinary',  # Ajout de Cloudinary
+    'cloudinary',  # Ajout de Cloudinary
     'cloudinary_storage',
 ]
 
@@ -95,14 +95,14 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 #STORAGES = {
     #"default": {
-        #"BACKEND": "django.core.files.storage.FileSystemStorage",
+    #  "BACKEND": "django.core.files.storage.FileSystemStorage",
         #"OPTIONS": {
-         #   "location": BASE_DIR / "media",
-       # },
-   # },
+            #   "location": BASE_DIR / "media",
+            # },
+    #},
     #"staticfiles": {
         #"BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
-   # },
+    #},
 #}
 
 STORAGES = {
@@ -113,16 +113,6 @@ STORAGES = {
         'BACKEND': 'django.contrib.staticfiles.storage.StaticFilesStorage',
     },
 }
-
-
-# Configure Cloudinary en utilisant CLOUDINARY_URL depuis le fichier .env
-cloudinary.config(
-    cloud_name=config('CLOUDINARY_URL').split('@')[1],
-    api_key=config('CLOUDINARY_URL').split('://')[1].split(':')[0],
-    api_secret=config('CLOUDINARY_URL').split(':')[2].split('@')[0]
-)
-
-
 
 # Clé primaire par défaut
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
@@ -154,9 +144,12 @@ SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
 
 
-# l'API paydounia
-PAYDUNYA_MASTER_KEY = config("PAYDUNYA_MASTER_KEY")
-PAYDUNYA_PRIVATE_KEY = config("PAYDUNYA_PRIVATE_KEY")
-PAYDUNYA_PUBLIC_KEY = config("PAYDUNYA_PUBLIC_KEY")
-PAYDUNYA_TOKEN = config("PAYDUNYA_TOKEN")
+CINETPAY_API_KEY = config("CINETPAY_API_KEY")
+CINETPAY_SITE_ID = config("CINETPAY_SITE_ID")
 
+# Configure Cloudinary en utilisant CLOUDINARY_URL depuis le fichier .env
+cloudinary.config(
+    cloud_name=config('CLOUDINARY_URL').split('@')[1],
+    api_key=config('CLOUDINARY_URL').split('://')[1].split(':')[0],
+    api_secret=config('CLOUDINARY_URL').split(':')[2].split('@')[0]
+)

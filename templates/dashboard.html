@@ -93,7 +93,7 @@
                             <small class="text-muted">Publié il y a {{ article.date_publication|timesince }}.</small>
                         </div>
                         <div class="card-footer text-center">
-                            <a href="{% url 'Gestions:creer_facture' article.id %}" class="btn btn-primary">Payer</a>
+                            <a href="{% url 'Gestions:detail_article' item.article.id %}" class="btn btn-primary">Payer</a>
                         </div>
                     </div>
                 </div>

@@ -24,7 +24,6 @@ urlpatterns = [
     path('article/<int:article_id>/', views.detail_article, name='detail_article'),
     path('publier_article/', views.publier_article, name='publier_article'),
     path('creer_facture/<int:article_id>/', views.creer_facture, name='creer_facture'),
-    path('paydunya-webhook/', views.paydunya_webhook, name='paydunya_webhook'),
     path('article/supprimer/<int:article_id>/', views.supprimer_article, name='supprimer_article'),
     # URLs pour la gestion des membres
     path('membres/', views.MembreListView.as_view(), name='membre_list'),  # Liste des membres
