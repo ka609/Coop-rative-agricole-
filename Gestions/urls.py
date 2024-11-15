@@ -23,6 +23,7 @@ urlpatterns = [
     path('acheter/<int:article_id>/', views.acheter_article, name='acheter_article'),  # URL pour commander un article
     path('article/<int:article_id>/', views.detail_article, name='detail_article'),
     path('publier_article/', views.publier_article, name='publier_article'),
+    path('cinetpay_webhook/', views.cinetpay_webhook, name='cinetpay_webhook'),
     path('creer_facture/<int:article_id>/', views.creer_facture, name='creer_facture'),
     path('article/supprimer/<int:article_id>/', views.supprimer_article, name='supprimer_article'),
     # URLs pour la gestion des membres

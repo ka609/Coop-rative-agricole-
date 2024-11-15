@@ -8,8 +8,7 @@ from django.contrib.auth.decorators import login_required
 from .utils import time_since_posted
 from django.contrib.auth.models import User
 from django.http import JsonResponse,HttpResponse
-import os, csv, io
-from django.conf import settings
+import csv, io
 import hmac
 import hashlib
 from django.db.models import Q
@@ -19,62 +18,62 @@ from django.views.decorators.csrf import csrf_exempt
 from django.core.paginator import Paginator
 import base64
 import matplotlib.pyplot as plt
-from cinetpay_sdk.s_d_k import Cinetpay
 import uuid
 from decouple import config
-from django.db import IntegrityError
+from cinetpay import Client, Config, Order
 
 
-CINETPAY_API_KEY = config("CINETPAY_API_KEY")
-CINETPAY_SITE_ID = config("CINETPAY_SITE_ID")
+CINETPAY_API_KEY = config('CINETPAY_API_KEY')
+CINETPAY_SITE_ID = config('CINETPAY_SITE_ID')
 
-@login_required
+
 def creer_facture(request, article_id):
-    # Récupère les informations de l'article
     article = get_object_or_404(Article, id=article_id)
-
-    # Initialise le client Cinetpay avec l'API Key et le Site ID
-    client = Cinetpay(CINETPAY_API_KEY, CINETPAY_SITE_ID)
     transaction_id = f"{request.user.id}-{article_id}-{uuid.uuid4()}"
 
-    # Vérifier si le transaction_id existe déjà
+    # Vérification si le transaction_id existe déjà
     while Transaction.objects.filter(transaction_id=transaction_id).exists():
-        # Si le transaction_id existe, générer un nouveau
         transaction_id = f"{request.user.id}-{article_id}-{uuid.uuid4()}"
 
-    data = {
-        'amount': article.prix,
-        'currency': "XOF",
-        'transaction_id': transaction_id,
-        'description': f"Achat de {article.nom}",
-        'return_url': "http://localhost:8000/confirmation/",
-        'notify_url': "http://localhost:8000/cinetpay/notification/",
-        'customer_name': request.user.first_name,
-        'customer_surname': request.user.last_name,
-    }
+    # Configuration CinetPay
+    config = Config(
+        currency='XOF',
+        languages='fr',
+        channels='ALL',
+        lock_phone_number=True,
+        raise_on_error=True,
+        credentials={'apikey': CINETPAY_API_KEY, 'site_id': CINETPAY_SITE_ID}
+    )
+    client = Client(configs=config)
 
-    # Initialisation du paiement avec Cinetpay
-    response = client.PaymentInitialization(data)
+    # Créer une commande
+    order = Order(
+        id=transaction_id,
+        amount=article.prix,
+        currency='XOF',
+        description=f"Achat de {article.nom}",
+        notify_url="http://localhost:8000/cinetpay/notification/",
+        return_url="http://localhost:8000/confirmation/",
+        customer={
+            'customer_id': str(request.user.id),
+            'customer_name': request.user.first_name,
+            'customer_surname': request.user.last_name,
+        }
+    )
 
-    if response.get('code') in ['00', '201']:  # Ajout de '201' comme code valide
-        payment_url = response['data']['payment_url']
-        try:
-            Transaction.objects.create(
-                acheteur=request.user,
-                article=article,
-                montant=article.prix,
-                statut="en attente",
-                transaction_id=transaction_id
-            )
-        except IntegrityError:
-            # Gérer l'erreur si une transaction avec ce même transaction_id existe toujours
-            return HttpResponse("Erreur de création de transaction. Tentative de transaction dupliquée.")
-        return redirect(payment_url)  # Redirection vers l'URL de paiement
+    # Initialisation de la transaction
+    response = client.initialize_transaction(order)
+    if response.code in [200, 201]:
+        Transaction.objects.create(
+            acheteur=request.user,
+            article=article,
+            montant=article.prix,
+            statut='en attente',
+            transaction_id=transaction_id
+        )
+        return redirect(response.json['payment_url'])
     else:
-        # Affichage des informations d'erreur
-        print("Erreur Cinetpay:", response)
-        return HttpResponse(
-            f"Erreur lors de la création du paiement: {response.get('message', 'Détails indisponibles')}")
+        return HttpResponse(f"Erreur: {response.json['message']}")
 
 
 @csrf_exempt
@@ -82,34 +81,31 @@ def cinetpay_webhook(request):
     if request.method != "POST":
         return JsonResponse({"message": "Méthode non autorisée"}, status=405)
 
-    try:
-        data = json.loads(request.body)
-    except json.JSONDecodeError:
-        return JsonResponse({"message": "Erreur de format JSON"}, status=400)
+        payload = request.body
+        signature = request.headers.get("Cinetpay-Signature")
 
-    signature = request.headers.get("Cinetpay-Signature")
+        if not verify_signature(payload, signature, CINETPAY_API_KEY):
+            return JsonResponse({"message": "Signature non valide"}, status=403)
 
-    if not verify_signature(request.body, signature):
-        return JsonResponse({"message": "Signature non valide"}, status=403)
+        data = json.loads(payload)
+        transaction_id = data.get('transaction_id')
 
-    if data.get("status") == "completed":
-        transaction_id = data.get("transaction_id")
-        transaction = Transaction.objects.filter(transaction_id=transaction_id).first()
-
-        if transaction:
-            transaction.statut = "payé"
-            transaction.save()
-            return JsonResponse({"message": "Paiement reçu et enregistré"}, status=200)
-        else:
+        if data.get('status') == "completed":
+            transaction = Transaction.objects.filter(transaction_id=transaction_id).first()
+            if transaction:
+                transaction.statut = "payé"
+                transaction.save()
+                return JsonResponse({"message": "Paiement validé"}, status=200)
             return JsonResponse({"message": "Transaction non trouvée"}, status=404)
 
-    return JsonResponse({"message": "Paiement non complété"}, status=400)
+        return JsonResponse({"message": "Paiement non complété"}, status=400)
 
-def verify_signature(payload, received_signature, secret):
-    computed_signature = hmac.new(
-        secret.encode(), payload, hashlib.sha256
-    ).hexdigest()
-    return hmac.compare_digest(computed_signature, received_signature)
+    def verify_signature(payload, received_signature, secret):
+        computed_signature = hmac.new(secret.encode(), payload, hashlib.sha256).hexdigest()
+        return hmac.compare_digest(computed_signature, received_signature)
+
+def confirmation(request):
+    return HttpResponse("Paiement confirmé avec succès.")
 
 
 # Vues pour les Membres
