@@ -41,6 +41,8 @@ def creer_facture(request, article_id):
     config=Config(
         currency='XOF',
         channels='ALL',
+        language= 'fr',
+        host= 'localhost',
         lock_phone_number=True,
         raise_on_error=True,
         credentials={'apikey': CINETPAY_API_KEY, 'site_id': CINETPAY_SITE_ID}
