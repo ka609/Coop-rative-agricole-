@@ -14,13 +14,15 @@ import hashlib
 from django.db.models import Q
 from django.contrib import messages
 import json
+from typing import Any
 from django.views.decorators.csrf import csrf_exempt
 from django.core.paginator import Paginator
 import base64
 import matplotlib.pyplot as plt
 import uuid
 from decouple import config
-from cinetpay import Client, Config, Order
+from cinetpay import Client, Config, Order, Languages,Customer
+
 
 
 CINETPAY_API_KEY = config('CINETPAY_API_KEY')
@@ -36,7 +38,7 @@ def creer_facture(request, article_id):
         transaction_id = f"{request.user.id}-{article_id}-{uuid.uuid4()}"
 
     # Configuration CinetPay
-    config = Config(
+    config=Config(
         currency='XOF',
         channels='ALL',
         lock_phone_number=True,
@@ -53,11 +55,18 @@ def creer_facture(request, article_id):
         description=f"Achat de {article.nom}",
         notify_url="http://localhost:8000/cinetpay/notification/",
         return_url="http://localhost:8000/confirmation/",
-        customer={
-            'customer_id': str(request.user.id),
-            'customer_name': request.user.first_name,
-            'customer_surname': request.user.last_name,
-        }
+        customer=Customer(
+            customer_id= 'str(request.user.id)',
+            customer_name= 'request.user.first_name',
+            customer_surname= 'request.user.last_name',
+            customer_email='request.user.email',
+            customer_phone_number='request.user.telephone',
+
+        )
+    )
+    # configuration de languages
+    Languages(
+        langues='Languages.FR',
     )
 
     # Initialisation de la transaction
@@ -75,27 +84,37 @@ def creer_facture(request, article_id):
         return HttpResponse(f"Erreur: {response.json['message']}")
 
 
-@csrf_exempt
-def cinetpay_webhook(request):
-    if request.method != "POST":
-        return JsonResponse({"message": "Méthode non autorisée"}, status=405)
+    @csrf_exempt
+    def cinetpay_webhook(request):
+        if request.method != "POST":
+            return JsonResponse({"message": "Méthode non autorisée"}, status=405)
 
-        payload = request.body
+        # Lire le corps de la requête
+        payload: Any = request.body
         signature = request.headers.get("Cinetpay-Signature")
 
+        # Vérification de la signature
         if not verify_signature(payload, signature, CINETPAY_API_KEY):
             return JsonResponse({"message": "Signature non valide"}, status=403)
 
-        data = json.loads(payload)
+        # Chargement des données JSON
+        try:
+            data = json.loads(payload)
+        except json.JSONDecodeError:
+            return JsonResponse({"message": "Données JSON invalides"}, status=400)
+
+        # Récupération de l'identifiant de la transaction
         transaction_id = data.get('transaction_id')
 
         if data.get('status') == "completed":
+            # Recherche de la transaction dans la base de données
             transaction = Transaction.objects.filter(transaction_id=transaction_id).first()
             if transaction:
                 transaction.statut = "payé"
                 transaction.save()
                 return JsonResponse({"message": "Paiement validé"}, status=200)
-            return JsonResponse({"message": "Transaction non trouvée"}, status=404)
+            else:
+                return JsonResponse({"message": "Transaction non trouvée"}, status=404)
 
         return JsonResponse({"message": "Paiement non complété"}, status=400)
 
