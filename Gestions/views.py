@@ -38,7 +38,6 @@ def creer_facture(request, article_id):
     # Configuration CinetPay
     config = Config(
         currency='XOF',
-        languages='fr',
         channels='ALL',
         lock_phone_number=True,
         raise_on_error=True,
