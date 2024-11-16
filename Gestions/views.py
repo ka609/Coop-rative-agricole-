@@ -83,44 +83,44 @@ def creer_facture(request, article_id):
     else:
         return HttpResponse(f"Erreur: {response.json['message']}")
 
+@csrf_exempt
+def cinetpay_webhook(request):
+    if request.method != "POST":
+        return JsonResponse({"message": "Méthode non autorisée"}, status=405)
 
-    @csrf_exempt
-    def cinetpay_webhook(request):
-        if request.method != "POST":
-            return JsonResponse({"message": "Méthode non autorisée"}, status=405)
+    # Lire le corps de la requête
+    payload: Any = request.body
+    signature = request.headers.get("Cinetpay-Signature")
 
-        # Lire le corps de la requête
-        payload: Any = request.body
-        signature = request.headers.get("Cinetpay-Signature")
+    # Vérification de la signature
+    if not verify_signature(payload, signature, CINETPAY_API_KEY):
+        return JsonResponse({"message": "Signature non valide"}, status=403)
 
-        # Vérification de la signature
-        if not verify_signature(payload, signature, CINETPAY_API_KEY):
-            return JsonResponse({"message": "Signature non valide"}, status=403)
+    # Chargement des données JSON
+    try:
+        data = json.loads(payload)
+    except json.JSONDecodeError:
+        return JsonResponse({"message": "Données JSON invalides"}, status=400)
 
-        # Chargement des données JSON
-        try:
-            data = json.loads(payload)
-        except json.JSONDecodeError:
-            return JsonResponse({"message": "Données JSON invalides"}, status=400)
+    # Récupération de l'identifiant de la transaction
+    transaction_id = data.get('transaction_id')
 
-        # Récupération de l'identifiant de la transaction
-        transaction_id = data.get('transaction_id')
+    if data.get('status') == "completed":
+        # Recherche de la transaction dans la base de données
+        transaction = Transaction.objects.filter(transaction_id=transaction_id).first()
+        if transaction:
+            transaction.statut = "payé"
+            transaction.save()
+            return JsonResponse({"message": "Paiement validé"}, status=200)
+        else:
+            return JsonResponse({"message": "Transaction non trouvée"}, status=404)
 
-        if data.get('status') == "completed":
-            # Recherche de la transaction dans la base de données
-            transaction = Transaction.objects.filter(transaction_id=transaction_id).first()
-            if transaction:
-                transaction.statut = "payé"
-                transaction.save()
-                return JsonResponse({"message": "Paiement validé"}, status=200)
-            else:
-                return JsonResponse({"message": "Transaction non trouvée"}, status=404)
+    return JsonResponse({"message": "Paiement non complété"}, status=400)
 
-        return JsonResponse({"message": "Paiement non complété"}, status=400)
 
-    def verify_signature(payload, received_signature, secret):
-        computed_signature = hmac.new(secret.encode(), payload, hashlib.sha256).hexdigest()
-        return hmac.compare_digest(computed_signature, received_signature)
+def verify_signature(payload, received_signature, secret):
+     computed_signature = hmac.new(secret.encode(), payload, hashlib.sha256).hexdigest()
+     return hmac.compare_digest(computed_signature, received_signature)
 
 def confirmation(request):
     return HttpResponse("Paiement confirmé avec succès.")
