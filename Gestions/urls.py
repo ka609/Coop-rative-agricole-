@@ -23,8 +23,11 @@ urlpatterns = [
     path('acheter/<int:article_id>/', views.acheter_article, name='acheter_article'),  # URL pour commander un article
     path('article/<int:article_id>/', views.detail_article, name='detail_article'),
     path('publier_article/', views.publier_article, name='publier_article'),
-    path('cinetpay_webhook/', views.cinetpay_webhook, name='cinetpay_webhook'),
-    path('creer_facture/<int:article_id>/', views.creer_facture, name='creer_facture'),
+    path('initiate-payment/', views.initiate_payment, name='initiate_payment'),
+    path('success/', views.success, name='success'),
+    path('error/', views.error, name='error'),
+    path('notify/', views.payment_notify, name='payment_notify'),
+    path('payment-form/', views.payment_form, name='payment_form'),
     path('article/supprimer/<int:article_id>/', views.supprimer_article, name='supprimer_article'),
     # URLs pour la gestion des membres
     path('membres/', views.MembreListView.as_view(), name='membre_list'),  # Liste des membres

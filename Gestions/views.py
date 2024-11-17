@@ -7,125 +7,86 @@ from .models import Discussion, Message
 from django.contrib.auth.decorators import login_required
 from .utils import time_since_posted
 from django.contrib.auth.models import User
-from django.http import JsonResponse,HttpResponse
+from django.http import JsonResponse,HttpResponse, HttpResponseBadRequest
 import csv, io
-import hmac
-import hashlib
 from django.db.models import Q
 from django.contrib import messages
-import json
-from typing import Any
-from django.views.decorators.csrf import csrf_exempt
 from django.core.paginator import Paginator
 import base64
 import matplotlib.pyplot as plt
-import uuid
+from cinetpay_sdk.s_d_k import Cinetpay
 from decouple import config
-from cinetpay import Client, Config, Order, Languages,Customer
 
 
+# Charger les clés API et l'ID du site à partir des variables d'environnement
+API_KEY = config('CINETPAY_API_KEY')
+SITE_ID = config('CINETPAY_SITE_ID')
 
-CINETPAY_API_KEY = config('CINETPAY_API_KEY')
-CINETPAY_SITE_ID = config('CINETPAY_SITE_ID')
+def initiate_payment(request):
+    if request.method == 'POST':
+        # Récupération des données du formulaire
+        name = request.POST.get('name')
+        surname = request.POST.get('surname')
+        amount = request.POST.get('amount')
 
+        # Validation des données
+        if not all([name, surname, amount]):
+            return HttpResponseBadRequest("Tous les champs sont requis.")
 
-def creer_facture(request, article_id):
-    article = get_object_or_404(Article, id=article_id)
-    transaction_id = f"{request.user.id}-{article_id}-{uuid.uuid4()}"
+        try:
+            # Conversion du montant en nombre
+            amount = float(amount)
+        except ValueError:
+            return HttpResponseBadRequest("Le montant doit être un nombre valide.")
 
-    # Vérification si le transaction_id existe déjà
-    while Transaction.objects.filter(transaction_id=transaction_id).exists():
-        transaction_id = f"{request.user.id}-{article_id}-{uuid.uuid4()}"
+        # Générer un ID unique pour la transaction
+        transaction_id = f"TRX-{name[:3].upper()}-{surname[:3].upper()}-{str(abs(hash(name + surname)))[:8]}"
 
-    # Configuration CinetPay
-    config=Config(
-        currency='XOF',
-        channels='ALL',
-        language= 'fr',
-        host= 'localhost',
-        lock_phone_number=True,
-        raise_on_error=True,
-        credentials={'apikey': CINETPAY_API_KEY, 'site_id': CINETPAY_SITE_ID}
-    )
-    client = Client(configs=config)
+        # Préparer les données pour CinetPay
+        data = {
+            'amount': amount,
+            'currency': "XOF",
+            'transaction_id': transaction_id,
+            'description': f"Paiement de {name} {surname} pour un montant de {amount} XOF",
+            'return_url': 'http://http://127.0.0.1:8000/Gestions/success/',
+            'notify_url': 'http://http://127.0.0.1:8000/Gestions/notify/',
+            'customer_name': name,
+            'customer_surname': surname,
+        }
 
-    # Créer une commande
-    order = Order(
-        id=transaction_id,
-        amount=article.prix,
-        currency='XOF',
-        description=f"Achat de {article.nom}",
-        notify_url="http://localhost:8000/cinetpay/notification/",
-        return_url="http://localhost:8000/confirmation/",
-        customer=Customer(
-            customer_id= 'str(request.user.id)',
-            customer_name= 'request.user.first_name',
-            customer_surname= 'request.user.last_name',
-            customer_email='request.user.email',
-            customer_phone_number='request.user.telephone',
-
-        )
-    )
-    # configuration de languages
-    Languages(
-        langues='Languages.FR',
-    )
-
-    # Initialisation de la transaction
-    response = client.initialize_transaction(order)
-    if response.code in [200, 201]:
-        Transaction.objects.create(
-            acheteur=request.user,
-            article=article,
-            montant=article.prix,
-            statut='en attente',
-            transaction_id=transaction_id
-        )
-        return redirect(response.json['payment_url'])
-    else:
-        return HttpResponse(f"Erreur: {response.json['message']}")
-
-@csrf_exempt
-def cinetpay_webhook(request):
-    if request.method != "POST":
-        return JsonResponse({"message": "Méthode non autorisée"}, status=405)
-
-    # Lire le corps de la requête
-    payload: Any = request.body
-    signature = request.headers.get("Cinetpay-Signature")
-
-    # Vérification de la signature
-    if not verify_signature(payload, signature, CINETPAY_API_KEY):
-        return JsonResponse({"message": "Signature non valide"}, status=403)
-
-    # Chargement des données JSON
     try:
-        data = json.loads(payload)
-    except json.JSONDecodeError:
-        return JsonResponse({"message": "Données JSON invalides"}, status=400)
+        # Initialiser le client CinetPay
+        client = Cinetpay(API_KEY, SITE_ID)
 
-    # Récupération de l'identifiant de la transaction
-    transaction_id = data.get('transaction_id')
+        # Initialiser le paiement
+        response = client.PaymentInitialization(data)
 
-    if data.get('status') == "completed":
-        # Recherche de la transaction dans la base de données
-        transaction = Transaction.objects.filter(transaction_id=transaction_id).first()
-        if transaction:
-            transaction.statut = "payé"
-            transaction.save()
-            return JsonResponse({"message": "Paiement validé"}, status=200)
+        # Vérifier la réponse
+        if response.get('code') == '201':  # Code 201 signifie "CREATED"
+            # Extraire l'URL de paiement
+            payment_url = response['data']['payment_url']
+            # Rediriger vers l'URL de paiement
+            return redirect(payment_url)
         else:
-            return JsonResponse({"message": "Transaction non trouvée"}, status=404)
+            # Afficher un message d'erreur
+            return render(request, 'error.html',
+                          {'message': response.get('message', 'Erreur lors de l\'initialisation du paiement.')})
 
-    return JsonResponse({"message": "Paiement non complété"}, status=400)
+    except Exception as e:
+        # Gérer les erreurs
+        return render(request, 'error.html', {'message': f"Erreur interne : {str(e)}"})
+
+        # Rediriger vers la page d'accueil si ce n'est pas une requête POST
+    return redirect('Gestions:dashboard')
+
+def success(request):
+    """Vue pour un paiement réussi"""
+    return render(request, 'success.html', {'message': "Paiement réussi !"})
 
 
-def verify_signature(payload, received_signature, secret):
-     computed_signature = hmac.new(secret.encode(), payload, hashlib.sha256).hexdigest()
-     return hmac.compare_digest(computed_signature, received_signature)
-
-def confirmation(request):
-    return HttpResponse("Paiement confirmé avec succès.")
+def error(request):
+    """Vue pour une erreur"""
+    return render(request, 'error.html', {'message': "Une erreur est survenue."})
 
 
 # Vues pour les Membres
@@ -563,3 +524,20 @@ def creer_production(request):
         form = ProductionAgricoleForm()
     return render(request, 'creer_production.html', {'form': form})
 
+def payment_form(request):
+    return render(request, 'payment_form.html')
+
+
+def payment_success(request):
+    # Logique à exécuter après un paiement réussi
+    return render(request, 'success.html', {'message': "Paiement réussi. Merci pour votre transaction !"})
+
+def payment_notify(request):
+    # Logique à exécuter pour traiter les notifications de paiement de CinetPay
+    if request.method == 'POST':
+        # Extraire et traiter les données reçues
+        data = request.POST
+        print("Notification de CinetPay :", data)
+        # Vous pouvez sauvegarder ou vérifier les données ici
+        return JsonResponse({'status': 'ok'})
+    return JsonResponse({'status': 'invalid request'}, status=400)

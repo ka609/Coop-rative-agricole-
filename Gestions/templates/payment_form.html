@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block title %}Formulaire de Paiement{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1 class="text-center mb-4">Formulaire de Paiement</h1>
+    <p class="text-center text-muted">{{ message }}</p>
+
+    <form method="POST" action="{% url 'Gestions:initiate_payment' %}" class="needs-validation" novalidate>
+        {% csrf_token %}
+
+        <div class="mb-3">
+            <label for="name" class="form-label">Nom</label>
+            <input type="text" class="form-control" id="name" name="name" placeholder="Entrez votre nom" required>
+            <div class="invalid-feedback">Veuillez entrer votre nom.</div>
+        </div>
+
+        <div class="mb-3">
+            <label for="surname" class="form-label">Prénom</label>
+            <input type="text" class="form-control" id="surname" name="surname" placeholder="Entrez votre prénom" required>
+            <div class="invalid-feedback">Veuillez entrer votre prénom.</div>
+        </div>
+
+        <div class="mb-3">
+            <label for="amount" class="form-label">Montant (XOF)</label>
+            <input type="number" class="form-control" id="amount" name="amount" placeholder="Entrez le montant" min="1" required>
+            <div class="invalid-feedback">Veuillez entrer un montant valide.</div>
+        </div>
+
+        <div class="text-center">
+            <button type="submit" class="btn btn-primary">Payer</button>
+        </div>
+    </form>
+</div>
+
+<script>
+    // Validation côté client Bootstrap
+    (function () {
+        'use strict';
+        const forms = document.querySelectorAll('.needs-validation');
+        Array.from(forms).forEach(form => {
+            form.addEventListener('submit', event => {
+                if (!form.checkValidity()) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                }
+                form.classList.add('was-validated');
+            }, false);
+        });
+    })();
+</script>
+{% endblock %}

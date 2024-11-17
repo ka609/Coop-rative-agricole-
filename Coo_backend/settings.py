@@ -94,24 +94,24 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 #STORAGES = {
-    #"default": {
-    #  "BACKEND": "django.core.files.storage.FileSystemStorage",
-        #"OPTIONS": {
-            #   "location": BASE_DIR / "media",
+    # "default": {
+        # "BACKEND": "django.core.files.storage.FileSystemStorage",
+        # "OPTIONS": {
+            #  "location": BASE_DIR / "media",
             # },
-    #},
+        # },
     #"staticfiles": {
-        #"BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
-    #},
+        # "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+        # },
 #}
 
 STORAGES = {
-    'default': {
-        'BACKEND': 'cloudinary_storage.storage.MediaCloudinaryStorage',
-    },
-    'staticfiles': {
-        'BACKEND': 'django.contrib.staticfiles.storage.StaticFilesStorage',
-    },
+ 'default': {
+    'BACKEND': 'cloudinary_storage.storage.MediaCloudinaryStorage',
+   },
+  'staticfiles': {
+         'BACKEND': 'django.contrib.staticfiles.storage.StaticFilesStorage',
+  },
 }
 
 # Clé primaire par défaut
@@ -129,15 +129,9 @@ DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 #les cookies
 SESSION_ENGINE = 'django.contrib.sessions.backends.signed_cookies'
 SESSION_COOKIE_AGE = 3600  # 1 heure en secondes
-SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+SESSION_EXPIRE_AT_BROWSER_CLOSE =True
 
-#les caches
-CACHES = {
-    'default': {
-        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
-        'LOCATION': 'unique-snowflake',
-   }
-}
+
 
 SECURE_SSL_REDIRECT = True
 SESSION_COOKIE_SECURE = True
