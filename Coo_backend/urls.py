@@ -19,8 +19,7 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
-from Gestions import views as gestions_views  # Assuming 'Gestions' is your app name
-from . import views
+from .import views
 
 urlpatterns = [
     path('', views.index, name='index'),

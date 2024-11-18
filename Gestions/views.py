@@ -14,7 +14,7 @@ from django.contrib import messages
 from django.core.paginator import Paginator
 import base64
 import matplotlib.pyplot as plt
-from cinetpay_sdk.s_d_k import Cinetpay
+import cinetpay
 from decouple import config
 
 
